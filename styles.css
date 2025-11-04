@@ -1,0 +1,318 @@
+body{
+    background-color: lightsteelblue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.shipGrid div{
+    border: solid 1px black;
+}
+
+.battleBody{
+    /* border: solid 1px navy;*/
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.board{
+    margin-right: 2vw;
+    border: solid 5px transparent;
+}
+
+.gameInfo{
+    border: solid 1px black;
+    padding: 5px 10px;
+    margin: 10px 5px;
+    display: inline-block;
+}
+
+
+.opponentBoard.MY_TURN {
+    cursor: pointer;
+    border: solid 5px green;
+}
+.opponentBoard.OPPONENT_TURN {
+    border: solid 5px red;
+}
+
+a{
+    color: black;
+}
+
+.board.myBoard{
+    cursor: no-drop;
+}
+
+h1{
+    margin: 3px;
+}
+h1 a{
+    font-size: 1.6em;
+    text-decoration: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+    font-style: italic;
+    color: navy;
+    padding: 0;
+    margin: 0;
+    text-shadow: 5px 5px 20px white;
+}
+h1 a span::after{
+    content: "";
+    margin-left: 5px;
+    color: black;
+    font-style: normal;
+    font-size: 2vw;
+    animation: shipMove 20s ease infinite forwards;
+    animation-delay: 3s;
+    position: relative;
+    display: inline-block;
+    opacity: 0;
+}
+
+@keyframes shipMove {
+    0% {left: -8em; font-size: 1vw; transform: scale(-1,1);opacity: 0.4; content: "⛴"; color: gray;}
+    60% {left: 10em; transform: scale(-1,1);}
+    65% {left: 10em;transform: scale(1,1); font-size: 1.5vw; opacity: 1; color: navy;}
+    85% {left: 0em; font-size: 2vw; content: "⛴";opacity: 0.5; font-size: 0.5vw;}    
+    86% {left: 0em; content: '\01F4A5';opacity: 0.8;font-size: 0.5vw;}
+    88% {left: 0em; content: '\01F4A5';opacity: 1; font-size: 2vw}
+    95% {font-size: 1vw; opacity: 0.5;}
+    100% {opacity: 0;}
+}
+
+form.cover{
+    border: solid 1px navy;
+    display: inline-flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    width: auto;
+}
+
+input[type="text"], input[type="password"]{
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+/* grid cells */
+.field{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.WATER_HIT{
+    background-color: pink;
+}
+
+.UNKNOWN{
+    background-color: ivory;
+}
+.UNKNOWN:after{
+    content: '?';
+    color: navy;
+    font-size: 3vw;
+    font-weight: bold;
+}
+
+.CHECKBOX{
+    /* background-color: aquamarine;*/
+}
+
+.CHECKBOX input[type='checkbox']{
+    display: none;
+}
+
+.CHECKBOX label{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.CHECKBOX label:after{
+    color: gray;
+    font-size: 1.5vw;
+    padding: 5px;
+    content: "⛴"; /* ferry */
+}
+
+.CHECKBOX label:has(input:checked):after{
+    font-size: 3vw;
+    /*text-decoration:  line-through;
+    text-decoration-color: red;*/
+    color: navy;
+}
+
+button{
+    border: solid 1px navy;
+    padding: 5px 10px;
+    margin: 5px 5px 5px 0;
+    border-radius: 8px;
+    color: navy;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/*
+label:has(input:checked){
+
+}
+
+.shipCheck:checked + label.field-label{
+    border: solid 3px red;
+    color: red;
+    background-color: red;
+}
+
+.CHECKBOX input[type='checkbox']:checked + span.ship-span{
+    border: solid 3px red;
+    color: red;
+    background-color: red;
+}
+*/
+.WATER{
+    background-color: aqua;
+}
+
+
+.SHIP{
+    background-color: aqua;
+
+}
+.SHIP.destroyed{
+    background-color: pink;
+}
+
+.SHIP:after{
+    color: navy;
+    font-size: 3vw;
+    content: "⛴"; /* ferry */
+}
+
+.SHIP.destroyed:after{
+    color: red;
+    font-size: 3vw;
+    content: "⛴"; /* ferry */
+}
+
+
+
+.message {
+    text-align: left;
+    vertical-align: middle;
+    border: solid 1px;
+    border-radius: 12px;
+    padding: 5px 10px;
+    margin: 5px;
+    display: inline-block;
+}
+
+.grids{
+    display: flex;
+    flex-direction: row;
+}
+
+.message.success{
+    color: green;
+    border-color: green;
+    background-color: darkseagreen;
+}
+
+.message.error{
+    color: yellow;
+    border-color: red;
+    background-color: red;
+}
+
+.message.info{
+    color: black;
+    border-color: gray;
+    background-color: white;
+}
+
+.myShip{
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+}
+
+.nothing{
+    width: 100%;
+    height: 100%;
+    background-color: lightblue;
+}
+
+header{
+    /*
+    background-color: aqua;*/
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border: solid 0.5em navy;
+    border-radius: 2em;
+    margin: 5px;
+    margin-bottom: 10px;
+
+}
+
+.menu ul{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu ul li{
+    border: solid 1px black;
+    padding: 2px 10px;
+    margin: 2px 10px;
+}
+
+
+.wave1 {
+    background: linear-gradient(-45deg, #5ba0f2, #2f4e72);
+    background-size: 400% 400%;
+    animation: AnimationName 10s both infinite;
+}
+
+.wave2{
+    background: linear-gradient(147deg, #5ba0f2, #6482a5);
+    background-size: 400% 400%;
+    animation: AnimationName 8s ease infinite;
+}
+
+@keyframes AnimationName {
+    0%{background-position:10% 5%}
+    50%{background-position:91% 95%}
+    100%{background-position:10% 5%}
+}
+
+input[type=checkbox].hitarea{
+    display: none;
+}
+.label{
+    border: 1px solid #000;
+    display: inline-block;
+    padding: 3px;
+    /* background: url("unchecked.png") no-repeat left center; */
+    /* padding-left: 15px; */
+}
+input[type=checkbox]:checked + .label {
+    background: #f00;
+    color: #fff;
+    /* background-image: url("checked.png"); */
+}
+
+.players{
+    display: flex;
+    flex-direction: row;
+}
+.player{
+    border: solid 1px black;
+}
