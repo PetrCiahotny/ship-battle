@@ -5,13 +5,21 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/game_objects/Logger.php";
 
 enum GameState: string
 {
+    /** Nenastaveno */
     case NOT_SET = "NOT_SET";
+    /** Žádná hra */
     case NONE = "NONE";
+    /** Hra vytvořena */
     case CREATED = "CREATED";
+    /** Připojení druhého hráče */
     case ACCEPTED = "ACCEPTED";
+    /** Mám rozmístěné lodě */
     case POSITIONED = "POSITIONED";
+    /** Soupeř má rozmístěné lodě */
     case OPPONENT_POSITIONED = "OPPONENT POSITIONED";
+    /** Hra začala */
     case STARTED = "STARTED";
+
     case MY_TURN = "MY_TURN";
     case OPPONENT_TURN = "OPPONENT_TURN";
     case WIN = "WIN";
@@ -29,13 +37,13 @@ class Game extends GameBase
     protected static ?string $root = null;
 
     protected int $historyId = -1;
-
+/*
     protected array $routes = [] {
         get {
             return $this->routes;
         }
     }
-
+*/
 
     protected GameState $State = GameState::NOT_SET;
 /*
@@ -46,17 +54,19 @@ class Game extends GameBase
 */
     protected ?array $currentGame = null;
     protected string $playerColumnName = '';
-    protected string $opponentColumnName = '';
-    protected array $positions = [];
+//    protected string $opponentColumnName = '';
+//    protected array $positions = [];
 
+    /** @var string nazev sloupce s mapou  */
     protected string $mapColumnName = '';
-    protected string $opponentMapColumnName = '';
+    //protected string $opponentMapColumnName = '';
 
+    /** @var string getter nazvu sloupce s mapou  */
     public function getMapColumnName(): string
     {
         return $this->mapColumnName;
     }
-
+/*
     public function getPlayerColumnName(): string
     {
         return $this->playerColumnName;
@@ -66,7 +76,7 @@ class Game extends GameBase
     {
         return $this->positions;
     }
-
+*/
 
     public int $gridCellCount = 10 {
         get {
@@ -148,17 +158,13 @@ class Game extends GameBase
         //echo print_r($currGane, true);
     }
 
-    public static function reload(){
-        header("Location: {$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}");
-        die();
-    }
 
     public function init(): void
     {
         if (Player::getInstance()->logged()) {
             $currGame = $this->getCurrentGame();
-            if (Game::getInstance()->getRouteAtIndex(0) == 'game') {                
-                switch (Game::getInstance()->getRouteAtIndex(1)) {
+            if (GameBase::getRouteAtIndex(0) == 'game') {
+                switch (GameBase::getRouteAtIndex(1)) {
                     case 'action':  
                         $action = $_POST['action'];
                         $postId = -1;
@@ -250,14 +256,14 @@ class Game extends GameBase
                             
                         break;
                     case 'show-game':
-                        $id = Game::getInstance()->getRouteAtIndex(2) ?? -1;
+                        $id = GameBase::getRouteAtIndex(2) ?? -1;
                         if($id > 0){
                             $this->historyId = $id;
                         }
                         Game::getInstance()->resetCurrentGame();
                         break;
                     case 'give-up':
-                        $id = Game::getInstance()->getRouteAtIndex(2);
+                        $id = GameBase::getRouteAtIndex(2);
                         $currGame = Game::getInstance()->getCurrentGame();
                         if ($currGame != null) {
                             Logger::log("give-up");
@@ -406,7 +412,7 @@ class Game extends GameBase
         $state = $this->getCurrentState();
         $availGames = $this->getAvailableGames();
         ?>        
-        <form enctype="application/x-www-form-urlencoded" method="post" action="<?= $this->getRouteLink("game/action") ?>">
+        <form enctype="application/x-www-form-urlencoded" method="post" action="<?= GameBase::getRouteLink("game/action") ?>">
         <?php
         switch($state){                      
             case GameState::NONE: ?>
@@ -416,7 +422,7 @@ class Game extends GameBase
                     <ul>
                     <?php
                         if(count($availGames) == 0){ ?>
-                            <li>žádné hry pro připojení</div>
+                            <li>žádné hry pro připojení</li>
                         <?php } else {
                             foreach ($availGames as $game) { ?>
                                 <li> [<?= $game['id'] ?>] <?= $game['opponent'] ?>
@@ -429,7 +435,7 @@ class Game extends GameBase
                     </ul>
                 </fieldset>
                 <div>
-                    <a href="<?= $this->getRouteLink('history') ?>">historie</a>
+                    <a href="<?= GameBase::getRouteLink('history') ?>">historie</a>
                 </div>
                 <?php
                 break;
@@ -478,23 +484,24 @@ class Game extends GameBase
             <div>nejste přihlášen</div>
         <?php }
     }
-
+/*
     public function getRouteAtIndex(int $index): string
     {
         return $index < count($this->routes) ? $this->routes[$index] : '';
     }
-
+*/
     protected function __construct()
     {
         parent::__construct();
         $this->State = GameState::NOT_SET;
         self::$root = $_SERVER["DOCUMENT_ROOT"];
+        /*
         if (isset($_GET['route'])) {
             $parts = explode('?', $_GET['route'], 2);
             $this->routes = explode('/', trim($parts[0], "/"));
         } else {
             $this->routes = [];
-        }
+        }*/
     }
 
     public static function getInstance(): self
@@ -504,20 +511,17 @@ class Game extends GameBase
         }
         return self::$instance;
     }
-
+/*
     public function getRouteLink(string $route): string
     {
         return "/index.php?route=" . $route;
     }
-
+*/
     public function getRoot(): string
     {
         return self::$root;
     }
 
-    public function isPost(): bool
-    {
-        return $_SERVER["REQUEST_METHOD"] == "POST";
-    }
+
 }
 

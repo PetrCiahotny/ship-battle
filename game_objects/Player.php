@@ -14,9 +14,9 @@ class Player extends GameBase
 
     public function init() : void
     {
-        if(Game::getInstance()->getRouteAtIndex(0) == 'user') {
-            if (Game::getInstance()->isPost()) {
-                switch (Game::getInstance()->getRouteAtIndex(1)) {
+        if(GameBase::getRouteAtIndex(0) == 'user') {
+            if (self::isPost()) {
+                switch (GameBase::getRouteAtIndex(1)) {
                     case 'login':
                         $this->login();
                         break;
@@ -27,7 +27,7 @@ class Player extends GameBase
                         break;
                 }
             } else {
-                if (Game::getInstance()->getRouteAtIndex(1) == 'logout') {
+                if (GameBase::getRouteAtIndex(1) == 'logout') {
                     $this->logout();
                 }
             }
@@ -45,19 +45,21 @@ class Player extends GameBase
 
     public function render() : void
     {
-        if(Game::getInstance()->getRouteAtIndex(1) == 'just-logged-out'){ ?>
+        if(GameBase::getRouteAtIndex(1) == 'just-logged-out'){ ?>
                 <div>právě jste byl odhlášen</div>
             <?php
             return;
         }
-        if(!Game::getInstance()->isPost() || !$this->logged()){ ?>
+        if(!self::isPost() || !$this->logged()){ ?>
             <div>
                 <form method="post" class="cover">
-                    <h2><?= Game::getInstance()->getRouteAtIndex(1) == 'login' ?  'přihlášení' : 'registrace' ?></h2>
+                    <h2><?= GameBase::getRouteAtIndex(1) == 'login' ?  'přihlášení' : 'registrace' ?></h2>
                     <input type="text" name="name" value="<?= $_POST['name'] ?? '' ?>" id="name" />
                     <input type="password" name="password" value="" id="password" />
                     <input name="action" value="přihlásit se" type="submit"/>
                 </form>
+
+                <?php /*include_once ($_SERVER["DOCUMENT_ROOT"] . "/components/login.php") */ ?>
             </div>
         <?php }else{ ?>
 
@@ -71,7 +73,7 @@ class Player extends GameBase
         }
         return self::$instance;
     }
-
+/*
     public function info(): void
     {
         if (Player::$instance->logged()) { ?>
@@ -82,13 +84,13 @@ class Player extends GameBase
                         href="<?= Game::getInstance()->getRouteLink("/user/register") ?>">registrace</a></div>
         <?php }
     }
-
+*/
     public function getUserLinks() : void
     {
         if(Player::$instance->logged()){ ?>
-                <div><a href="#">uživatel <?= $_SESSION['user'] ?></a> <a href="<?= Game::getInstance()->getRouteLink('/user/logout') ?>">odhlásit</a></div>
+                <div><a href="#">uživatel <?= $_SESSION['user'] ?></a> <a href="<?= GameBase::getRouteLink('/user/logout') ?>">odhlásit</a></div>
         <?php } else{ ?>
-            <div><a href="<?= Game::getInstance()->getRouteLink("/user/login") ?>">přihlášení</a> / <a href="<?= Game::getInstance()->getRouteLink("/user/register") ?>">registrace</a> </div>
+            <div><a href="<?= GameBase::getRouteLink("/user/login") ?>">přihlášení</a> / <a href="<?= GameBase::getRouteLink("/user/register") ?>">registrace</a> </div>
         <?php }
     }
 
@@ -109,33 +111,11 @@ class Player extends GameBase
                             $_SESSION['id'] = $res[0]['id'];
                             header("Location: {$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}");
                             die();
-                            /*
-                            $this->prihlasen = true;
-                            $cookie = md5('uziv:'.$jmeno.'abcd');
-                            setcookie('uzivatel', $cookie, time() + 3600);
-                            DB::query("INSERT INTO lode.sezeni (id, data, vvtvoreno, aktualizovano)
-                                VALUES (:id, :data, :vvtvoreno, :aktualizovano)",
-                                [
-                                    'id' => $cookie,
-                                    'data' => "{}",
-                                    'vvtvoreno' => date("Y-m-d H:i:s"),
-                                    'aktualizovano' => date("Y-m-d H:i:s")
-
-                                ]);*/
                         }
                     }
                 }
             if (!$this->logged()) {
-               //$this->errors[] = "neplatné heslo nebo uživatel";
-                /*
-                if (isset($_COOKIE['uzivatel'])) {
-                    $res = DB::query("SELECT * FROM lode.sezeni WHERE id = :id", ['id' => $_COOKIE['uzivatel']]);
-                    if (count($res) == 1) {
-                        $now = date("Y-m-d H:i:s");
-                        $res = DB::query("UPDATE lode.sezeni SET aktualizovano = '{$now}' WHERE id = :id", ['id' => $_COOKIE['uzivatel']]);
-                        $this->prihlasen = true;
-                    }
-                }*/
+                $this->addMessage('neplatné heslo nebo uživatel', MessageLevel::ERROR);
             }
         } catch (Throwable $ex) {
 
