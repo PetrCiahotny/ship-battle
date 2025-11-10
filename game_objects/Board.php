@@ -1,6 +1,6 @@
 <?php
-include_once  $_SERVER["DOCUMENT_ROOT"]."/game_objects/GameBase.php";
-include_once  $_SERVER["DOCUMENT_ROOT"]."/game_objects/Game.php";
+//include_once  "GameBase.php";
+//include_once  "Game.php";
 
 
 enum BoardCellState : string{

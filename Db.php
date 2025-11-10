@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER["DOCUMENT_ROOT"] . "/game_objects/Logger.php";
+include_once "game_objects/Logger.php";
 
 class Db
 {

@@ -5,10 +5,18 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-include_once $_SERVER["DOCUMENT_ROOT"] . "/game_objects/Game.php";
-include_once Game::getInstance()->getRoot() . "/game_objects/Player.php";
-include_once Game::getInstance()->getRoot() . "/game_objects/Board.php";
-include_once Game::getInstance()->getRoot() . "/game_objects/History.php";
+
+
+/**
+ * Konstanta relativní cesty k rootu URL na serveru např.: adresar (z URL http://localhost/adresar)
+ */
+define("RELATIVE_ROOT", rtrim(dirname($_SERVER['PHP_SELF']), "/"));
+
+//include_once ROOT . "/game_objects/Game.php";
+include_once "game_objects/Game.php";
+include_once "game_objects/Player.php";
+include_once "game_objects/Board.php";
+include_once "game_objects/History.php";
 Game::getInstance()->init();
 Player::getInstance()->init();
 Board::getInstance()->init();
@@ -17,8 +25,9 @@ Board::getInstance()->init();
 <html>
     <head>
         <title>Ship battle</title>
-        <link rel="stylesheet"  href="/styles.css"/>
-        <script type="text/javascript" src="/script.js?v3"></script>
+        <link rel="stylesheet"  href="styles.css"/>
+        <script type="text/javascript" src="script.js?v3"></script>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
         <style>
             .shipGrid {
                 padding: 0;
@@ -37,7 +46,7 @@ Board::getInstance()->init();
     </head>
     <body>
         <header class="wave1 header">
-            <h1><a href="/">Ship battle <span></span></a></h1> <?php Player::getInstance()->getUserLinks(); ?>
+            <h1><a href=<?= RELATIVE_ROOT ?>/>Ship battle <span></span></a></h1> <?php Player::getInstance()->getUserLinks(); ?>
         </header>
         <?php
             GameBase::renderMessages();

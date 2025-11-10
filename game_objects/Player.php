@@ -39,17 +39,13 @@ class Player extends GameBase
         session_destroy();
         session_start();
         session_regenerate_id(true);
-        header("Location: {$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}?route=user/just-logged-out");
+        self::reload();
+        //header("Location: ".RELATIVE_ROOT." ?route=user/just-logged-out");
         die();
     }
 
     public function render() : void
     {
-        if(GameBase::getRouteAtIndex(1) == 'just-logged-out'){ ?>
-                <div>právě jste byl odhlášen</div>
-            <?php
-            return;
-        }
         if(!self::isPost() || !$this->logged()){ ?>
             <div>
                 <form method="post" class="cover">
@@ -109,7 +105,9 @@ class Player extends GameBase
                         if (count($res) == 1) {
                             $_SESSION['user'] = $res[0]['jmeno'];
                             $_SESSION['id'] = $res[0]['id'];
-                            header("Location: {$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}");
+                            //header("Location: {$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}");
+                            //header("Location: ".RELATIVE_ROOT);
+                            self::reload();
                             die();
                         }
                     }

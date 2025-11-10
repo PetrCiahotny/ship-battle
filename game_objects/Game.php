@@ -1,7 +1,9 @@
 <?php
-include_once $_SERVER["DOCUMENT_ROOT"] . "/game_objects/GameBase.php";
-include_once $_SERVER["DOCUMENT_ROOT"] . "/Db.php";
-include_once $_SERVER["DOCUMENT_ROOT"] . "/game_objects/Logger.php";
+//include_once $_SERVER["DOCUMENT_ROOT"] .
+include_once  "GameBase.php";
+include_once "Db.php";
+include_once realpath(__DIR__."/../Db.php");
+include_once "Logger.php";
 
 enum GameState: string
 {
@@ -78,16 +80,8 @@ class Game extends GameBase
     }
 */
 
-    public int $gridCellCount = 10 {
-        get {
-            return $this->gridCellCount;
-        }
-    }
-    public string $cellSize = '3.5vw' {
-        get {
-            return $this->cellSize;
-        }
-    }
+    public int $gridCellCount = 10;
+    public string $cellSize = '3.5vw';
 
     public function resetCurrentState(): void{
         $this->State = GameState::NOT_SET;

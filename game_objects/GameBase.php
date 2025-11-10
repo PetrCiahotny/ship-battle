@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER["DOCUMENT_ROOT"] . "/game_objects/Message.php";
+include_once "game_objects/Message.php";
 
 
 abstract class  GameBase
@@ -37,7 +37,8 @@ abstract class  GameBase
     }
 
     public static function reload() : void{
-        header("Location: {$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}");
+        //header("Location: {$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}");
+        header('Location: '.RELATIVE_ROOT.'/');
         die();
     }
 
@@ -48,7 +49,7 @@ abstract class  GameBase
 
     public static function getRouteLink(string $route): string
     {
-        return "/index.php?route=" . $route;
+        return RELATIVE_ROOT. "/index.php?route=" . $route;
     }
 
     public static function getRouteAtIndex(int $index): string
