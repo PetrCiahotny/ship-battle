@@ -40,7 +40,6 @@ class Player extends GameBase
         session_start();
         session_regenerate_id(true);
         self::reload();
-        //header("Location: ".RELATIVE_ROOT." ?route=user/just-logged-out");
         die();
     }
 
@@ -93,9 +92,6 @@ class Player extends GameBase
                         if (count($res) == 1) {
                             $_SESSION['user'] = $res[0]['jmeno'];
                             $_SESSION['id'] = $res[0]['id'];
-
-                            //header("Location: {$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}");
-                            //header("Location: ".RELATIVE_ROOT);
                             self::reload();
                             die();
                         }

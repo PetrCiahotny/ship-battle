@@ -9,5 +9,6 @@ class GameApi extends GameBase
     public static function getInstance(): self
     {
         // TODO: Implement getInstance() method.
+        throw new Exception('Not implemented');
     }
 }

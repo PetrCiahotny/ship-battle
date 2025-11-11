@@ -25,7 +25,5 @@ class Logger
                 fclose($f);
             }
         }
-        //$message = "  ##  {$message}";
-        //error_log($message, 0);
     }
 }

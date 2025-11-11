@@ -63,7 +63,6 @@ abstract class  GameBase
                 break;
         }
         return $ret;
-        //return RELATIVE_ROOT. "/index.php?route=" . $route;
     }
 
 

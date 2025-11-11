@@ -1,9 +1,4 @@
 <?php
-
-//include_once  "GameBase.php";
-//include_once  "Game.php";
-
-
 enum BoardCellState : string{
     case WATER = "WATER";
     case CHECKBOX = "CHECKBOX";
@@ -12,17 +7,7 @@ enum BoardCellState : string{
     case UNKNOWN = "UNKNOWN";
     case WATER_HIT  = "WATER_HIT";
 }
-/*
-class BoardCell
-{
-    public bool $ckeckBox = false;
-    public bool $water = true;
-    public bool $ship = false;
-    public bool $destroyedShip = false;
-    public bool $iDontKnow = false;
-    public bool $waterHit = false;
-}
-*/
+
 class Board extends GameBase
 {
     protected static ?Board $instance = null;
@@ -54,8 +39,6 @@ class Board extends GameBase
         }
     }
 
-
-
     protected function renderBoard(bool $opponent): void{
         $celCount = pow(Game::getInstance()->gridCellCount, 2);
         $currGame = Game::getInstance()->getCurrentGame();
@@ -67,23 +50,18 @@ class Board extends GameBase
             <div class="shipGrid">
             <?php
             for ($i = 0; $i < $celCount; $i++) {
-                //$cell = BoardCellState::UNKNOWN;
                 $classes = [];
                 if($opponent){
                     switch($state) {
                         case GameState::ACCEPTED:
-                  //          $cell = BoardCellState::CHECKBOX;
                             $classes[] = BoardCellState::CHECKBOX->value;
                             break;
                         case GameState::POSITIONED:
                         case GameState::OPPONENT_POSITIONED:
                         case GameState::MY_TURN:
-                            //$attrs[] = "onclick=(event)=>{shot(event);}";
                         case GameState::OPPONENT_TURN:
                         case GameState::WIN:
                         case GameState::DEFEAT:
-                    //        $cell = in_array($i, $ships) ? BoardCellState::SHIP : BoardCellState::WATER;
-                            //$classes[] = BoardCellState::WATER->value;// in_array($i, $ships) ? BoardCellState::SHIP->value : BoardCellState::WATER->value;
                             if(in_array($i, $currGame['my_hits'])){
                                 $classes[] = BoardCellState::SHIP->value;
                                 $classes[] = 'destroyed';
@@ -93,7 +71,6 @@ class Board extends GameBase
                                 }else{
                                     $classes[] = BoardCellState::UNKNOWN->value;
                                 }
-                                // in_array($i, $ships) ? BoardCellState::SHIP->value : BoardCellState::WATER->value;
                             }
                             break;
                     }
@@ -101,7 +78,6 @@ class Board extends GameBase
                 }else{
                     switch($state){
                         case GameState::ACCEPTED:
-                      //      $cell = BoardCellState::CHECKBOX;
                             $classes[] = BoardCellState::CHECKBOX->value;
                             break;
                         case GameState::POSITIONED:
@@ -110,8 +86,6 @@ class Board extends GameBase
                         case GameState::MY_TURN:
                         case GameState::WIN:
                         case GameState::DEFEAT:
-                        //    $cell = in_array($i, $ships) ? BoardCellState::SHIP : BoardCellState::WATER;
-
                             if(in_array($i, $currGame['opponent_hits'])){
                                 $classes[] = BoardCellState::SHIP->value;
                                 $classes[] = 'destroyed';
@@ -119,10 +93,8 @@ class Board extends GameBase
                                 if(in_array($i, $currGame['opponent_shots'])){
                                     $classes[] = BoardCellState::WATER_HIT->value;
                                 }else{
-                                    //$classes[] = BoardCellState::UNKNOWN->value;
                                     $classes[] = in_array($i, $ships ?? []) ? BoardCellState::SHIP->value : BoardCellState::WATER->value;
                                 }
-                                // in_array($i, $ships) ? BoardCellState::SHIP->value : BoardCellState::WATER->value;
                             }
                             break;
                     }
@@ -147,7 +119,6 @@ class Board extends GameBase
         </div> <?php
     }
 
-
     public function render(): void
     {
         $state = Game::getInstance()->getCurrentState();
@@ -156,12 +127,10 @@ class Board extends GameBase
                 $this->startupJS[] = "prepareShot()";
             }
              ?>
-            <?php /* <form id="boardForm" method="post" action="<?= Game::getInstance()->getRouteLink("/game/board") ?>"> */ ?>
                 <div class="grids">
             <?php
                 switch ($state){
                     case GameState::ACCEPTED:
-                        //$this->renderMyBoard();
                         $this->renderBoard(false);
                         break;
                     case GameState::POSITIONED:
@@ -174,8 +143,6 @@ class Board extends GameBase
                     case GameState::DEFEAT:
                         $this->renderBoard(false);
                         $this->renderBoard(true);
-                        //$this->renderMyBoard();
-                        //$this->renderOpponentBoard();
                         break;
                     case GameState::NONE: ?>
                             <div>NONE</div>
@@ -184,7 +151,6 @@ class Board extends GameBase
                 }
             ?>
                 </div>
-            <?php /*</form> */ ?>
             <script>
                 <?php foreach ($this->startupJS as $call){ ?>
                     document.addEventListener("DOMContentLoaded", <?= $call ?>);
@@ -193,5 +159,4 @@ class Board extends GameBase
         <?php }
 
     }
-
 }

@@ -1,13 +1,6 @@
 <?php
 include_once "consts.php";
-//session_start();
 
-/**
- * Konstanta relativní cesty k rootu URL na serveru např.: adresar (z URL http://localhost/adresar)
- */
-define("RELATIVE_ROOT", rtrim(dirname($_SERVER['PHP_SELF']), "/"));
-
-//include_once ROOT . "/game_objects/Game.php";
 include_once "game_objects/Game.php";
 include_once "game_objects/Player.php";
 include_once "game_objects/Board.php";
