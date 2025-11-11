@@ -49,6 +49,8 @@ abstract class  GameBase
 
     public static function getRouteLink(string $route): string
     {
+        $params = explode('/', $route);
+        $ret = RELATIVE_ROOT. "/index.php";
         return RELATIVE_ROOT. "/index.php?route=" . $route;
     }
 
