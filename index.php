@@ -1,16 +1,11 @@
 <?php
-session_start();
-
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-
-
+include_once "consts.php";
+//session_start();
 
 /**
  * Konstanta relativní cesty k rootu URL na serveru např.: adresar (z URL http://localhost/adresar)
  */
-define("RELATIVE_ROOT", rtrim(dirname($_SERVER['PHP_SELF']), "/"));
+//define("RELATIVE_ROOT", rtrim(dirname($_SERVER['PHP_SELF']), "/"));
 
 //include_once ROOT . "/game_objects/Game.php";
 include_once "game_objects/Game.php";
@@ -46,14 +41,14 @@ Board::getInstance()->init();
     </head>
     <body>
         <header class="wave1 header">
-            <h1><a href=<?= RELATIVE_ROOT ?>/>Ship battle <span></span></a></h1> <?php Player::getInstance()->getUserLinks(); ?>
+            <h1><a href=<?= WEB_PATH ?>/>Ship battle <span></span></a></h1> <?php Player::getInstance()->getUserLinks(); ?>
         </header>
         <?php
             GameBase::renderMessages();
         ?>
         <div class="battleBody">
             <?php
-            switch (GameBase::getRouteAtIndex(0)) {
+            switch (GameBase::getParamByIndex(0)) {
                 case 'user':
                     Player::getInstance()->render();
                     break;

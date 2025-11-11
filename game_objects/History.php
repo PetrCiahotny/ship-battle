@@ -43,8 +43,8 @@ class History extends GameBase
         //Logger::log("Curr call ");
         //Logger::log("Curr call ". Game::getInstance()->getRouteAtIndex(1));
         $id = -1;
-        if (GameBase::getRouteAtIndex(0) == 'history') {
-             $id = GameBase::getRouteAtIndex(1) ?? -1;
+        if (GameBase::getParamByIndex(0) == 'history') {
+             $id = GameBase::getParamByIndex(1) ?? -1;
         }
         Game::getInstance()->resetCurrentState();
         Game::getInstance()->resetCurrentGame();
@@ -57,7 +57,7 @@ class History extends GameBase
              ?>
             <div style="border:solid 1px black; padding: 10px;
                     background-color: <?= $game['vitez'] == $_SESSION['id'] ? 'lightgreen' : 'pink' ?> ">
-                <a href="<?= GameBase::getRouteLink("/game/show-game/{$game['id']}") ?>">
+                <a href="<?= GameBase::getLinkUrl("/game/show-game/{$game['id']}") ?>">
                     <?= $game['id'] ?></a>
                 <?= $game['cas_start'] ?>
                 <?= $game['opponent'] ?>

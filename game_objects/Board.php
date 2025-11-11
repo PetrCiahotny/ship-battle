@@ -1,4 +1,5 @@
 <?php
+
 //include_once  "GameBase.php";
 //include_once  "Game.php";
 
@@ -87,7 +88,7 @@ class Board extends GameBase
                                 $classes[] = BoardCellState::SHIP->value;
                                 $classes[] = 'destroyed';
                             }else{
-                                if(in_array($i, $currGame['my_shots'])){
+                                if(in_array($i, $currGame['my_shots'] ?? [])){
                                     $classes[] = BoardCellState::WATER_HIT->value;
                                 }else{
                                     $classes[] = BoardCellState::UNKNOWN->value;
@@ -119,7 +120,7 @@ class Board extends GameBase
                                     $classes[] = BoardCellState::WATER_HIT->value;
                                 }else{
                                     //$classes[] = BoardCellState::UNKNOWN->value;
-                                    $classes[] = in_array($i, $ships) ? BoardCellState::SHIP->value : BoardCellState::WATER->value;
+                                    $classes[] = in_array($i, $ships ?? []) ? BoardCellState::SHIP->value : BoardCellState::WATER->value;
                                 }
                                 // in_array($i, $ships) ? BoardCellState::SHIP->value : BoardCellState::WATER->value;
                             }
