@@ -1,7 +1,4 @@
 <?php
-//include_once $_SERVER["DOCUMENT_ROOT"] . "/game_objects/GameBase.php";
-//include_once $_SERVER["DOCUMENT_ROOT"] . "/Db.php";
-//include_once $_SERVER["DOCUMENT_ROOT"] . "/game_objects/Logger.php";
 
 class History extends GameBase
 {
@@ -37,19 +34,14 @@ class History extends GameBase
 
     public function render(): void
     {
-        /*
-        $games = DB::select("SELECT * FROM lode.bitvy WHERE :me IN (uzivatel1, uzivatel2)",
-            ['me'=>$_SESSION['id'] ?? -1] );*/
-        //Logger::log("Curr call ");
-        //Logger::log("Curr call ". Game::getInstance()->getRouteAtIndex(1));
+
         $id = -1;
         if (GameBase::getParamByKey(0) == 'history') {
              $id = GameBase::getParamByKey(1) ?? -1;
         }
         Game::getInstance()->resetCurrentState();
         Game::getInstance()->resetCurrentGame();
-        //$games = Game::getInstance()->getCurrentGame();
-        //Logger::log($games);
+
         $games = $this->getHistoryList();
         ?>
         <div>Historie</div>
@@ -62,10 +54,6 @@ class History extends GameBase
                 <?= $game['cas_start'] ?>
                 <?= $game['opponent'] ?>
                 <?= $game['opponent_name'] ?>
-                <?php /*
-                <div>
-                    <?php echo str_replace(["\n", ' '], ['<br/>', '&nbsp;'], print_r($game, true)) ?>
-                </div> */
                 ?>
             </div>
         <?php }

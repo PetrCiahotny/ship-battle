@@ -39,46 +39,20 @@ class Game extends GameBase
     protected static ?string $root = null;
 
     protected int $historyId = -1;
-/*
-    protected array $routes = [] {
-        get {
-            return $this->routes;
-        }
-    }
-*/
 
     protected GameState $State = GameState::NOT_SET;
-/*
-    public function getState(): GameState
-    {
-        return $this->State;
-    }
-*/
+
     protected ?array $currentGame = null;
     protected string $playerColumnName = '';
-//    protected string $opponentColumnName = '';
-//    protected array $positions = [];
 
     /** @var string nazev sloupce s mapou  */
     protected string $mapColumnName = '';
-    //protected string $opponentMapColumnName = '';
 
     /** @var string getter nazvu sloupce s mapou  */
     public function getMapColumnName(): string
     {
         return $this->mapColumnName;
     }
-/*
-    public function getPlayerColumnName(): string
-    {
-        return $this->playerColumnName;
-    }
-
-    public function getPositions(): array
-    {
-        return $this->positions;
-    }
-*/
 
     public int $gridCellCount = 10;
     public string $cellSize = '3.5vw';
@@ -149,7 +123,6 @@ class Game extends GameBase
         }
         Logger::log("return...{$this->State->value}");
         return $this->State;
-        //echo print_r($currGane, true);
     }
 
 
@@ -300,7 +273,6 @@ class Game extends GameBase
         if($currGame && intval($currGame['opponent_id']) > 0){
             $this->addMessage('soupeř: '.$currGame['opponent'], MessageLevel::SUCCESS);
         }
-        //$this->addMessage($currState->value.' *** '.($_SESSION['game'] ?? -1), MessageLevel::SUCCESS);
     }
 
     protected function getAvailableGames(): array
@@ -478,24 +450,12 @@ class Game extends GameBase
             <div>nejste přihlášen</div>
         <?php }
     }
-/*
-    public function getRouteAtIndex(int $index): string
-    {
-        return $index < count($this->routes) ? $this->routes[$index] : '';
-    }
-*/
+
     protected function __construct()
     {
         parent::__construct();
         $this->State = GameState::NOT_SET;
         self::$root = $_SERVER["DOCUMENT_ROOT"];
-        /*
-        if (isset($_GET['route'])) {
-            $parts = explode('?', $_GET['route'], 2);
-            $this->routes = explode('/', trim($parts[0], "/"));
-        } else {
-            $this->routes = [];
-        }*/
     }
 
     public static function getInstance(): self
@@ -505,17 +465,10 @@ class Game extends GameBase
         }
         return self::$instance;
     }
-/*
-    public function getRouteLink(string $route): string
-    {
-        return "/index.php?route=" . $route;
-    }
-*/
+
     public function getRoot(): string
     {
         return self::$root;
     }
-
-
 }
 
