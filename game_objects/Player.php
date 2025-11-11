@@ -14,9 +14,9 @@ class Player extends GameBase
 
     public function init() : void
     {
-        if(GameBase::getRouteAtIndex(0) == 'user') {
+        if(GameBase::getParamByIndex(0) == 'user') {
             if (self::isPost()) {
-                switch (GameBase::getRouteAtIndex(1)) {
+                switch (GameBase::getParamByIndex(1)) {
                     case 'login':
                         $this->login();
                         break;
@@ -27,7 +27,7 @@ class Player extends GameBase
                         break;
                 }
             } else {
-                if (GameBase::getRouteAtIndex(1) == 'logout') {
+                if (GameBase::getParamByIndex(1) == 'logout') {
                     $this->logout();
                 }
             }
@@ -49,7 +49,7 @@ class Player extends GameBase
         if(!self::isPost() || !$this->logged()){ ?>
             <div>
                 <form method="post" class="cover">
-                    <h2><?= GameBase::getRouteAtIndex(1) == 'login' ?  'přihlášení' : 'registrace' ?></h2>
+                    <h2><?= GameBase::getParamByIndex(1) == 'login' ?  'přihlášení' : 'registrace' ?></h2>
                     <input type="text" name="name" value="<?= $_POST['name'] ?? '' ?>" id="name" />
                     <input type="password" name="password" value="" id="password" />
                     <input name="action" value="přihlásit se" type="submit"/>
@@ -84,9 +84,9 @@ class Player extends GameBase
     public function getUserLinks() : void
     {
         if(Player::$instance->logged()){ ?>
-                <div><a href="#">uživatel <?= $_SESSION['user'] ?></a> <a href="<?= GameBase::getRouteLink('/user/logout') ?>">odhlásit</a></div>
+                <div><span>uživatel: <?= $_SESSION['user'] ?></span> <a href="<?= GameBase::getLinkUrl('/user/logout') ?>">odhlásit</a></div>
         <?php } else{ ?>
-            <div><a href="<?= GameBase::getRouteLink("/user/login") ?>">přihlášení</a> / <a href="<?= GameBase::getRouteLink("/user/register") ?>">registrace</a> </div>
+            <div><a href="<?= GameBase::getLinkUrl("/user/login") ?>">přihlášení</a> / <a href="<?= GameBase::getLinkUrl("/user/register") ?>">registrace</a> </div>
         <?php }
     }
 

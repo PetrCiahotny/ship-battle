@@ -157,8 +157,8 @@ class Game extends GameBase
     {
         if (Player::getInstance()->logged()) {
             $currGame = $this->getCurrentGame();
-            if (GameBase::getRouteAtIndex(0) == 'game') {
-                switch (GameBase::getRouteAtIndex(1)) {
+            if (GameBase::getParamByIndex(0) == 'game') {
+                switch (GameBase::getParamByIndex(1)) {
                     case 'action':  
                         $action = $_POST['action'];
                         $postId = -1;
@@ -250,14 +250,14 @@ class Game extends GameBase
                             
                         break;
                     case 'show-game':
-                        $id = GameBase::getRouteAtIndex(2) ?? -1;
+                        $id = GameBase::getParamByIndex(2) ?? -1;
                         if($id > 0){
                             $this->historyId = $id;
                         }
                         Game::getInstance()->resetCurrentGame();
                         break;
                     case 'give-up':
-                        $id = GameBase::getRouteAtIndex(2);
+                        $id = GameBase::getParamByIndex(2);
                         $currGame = Game::getInstance()->getCurrentGame();
                         if ($currGame != null) {
                             Logger::log("give-up");
@@ -406,7 +406,7 @@ class Game extends GameBase
         $state = $this->getCurrentState();
         $availGames = $this->getAvailableGames();
         ?>        
-        <form enctype="application/x-www-form-urlencoded" method="post" action="<?= GameBase::getRouteLink("game/action") ?>">
+        <form enctype="application/x-www-form-urlencoded" method="post" action="<?= GameBase::getLinkUrl("game/action") ?>">
         <?php
         switch($state){                      
             case GameState::NONE: ?>
@@ -429,7 +429,7 @@ class Game extends GameBase
                     </ul>
                 </fieldset>
                 <div>
-                    <a href="<?= GameBase::getRouteLink('history') ?>">historie</a>
+                    <a href="<?= GameBase::getLinkUrl('history') ?>">historie</a>
                 </div>
                 <?php
                 break;
