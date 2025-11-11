@@ -1,24 +1,6 @@
-
-<head>
-    <title><?= APP_NAME ?></title>
-    <link rel="stylesheet"  href="styles.css"/>
-    <script type="text/javascript" src="script.js?v3"></script>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <style>
-        <?php /*
-        .shipGrid {
-            padding: 0;
-            display: grid;
-            grid-template-columns: repeat(<?= Game::getInstance()->gridCellCount ?>, <?= Game::getInstance()->cellSize ?>);
-            grid-template-rows: repeat(<?= Game::getInstance()->gridCellCount ?>, <?= Game::getInstance()->cellSize ?>);
-        }
-        .shipCheck{
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            border: solid 1px red;*/ ?>
-        }
-    </style>
-
-</head>
-
+<?php
+include_once INCLUDE_PATH."/game_objects/Player.php";
+?>
+<header class="wave1 header">
+    <h1><a href=<?= WEB_PATH ?>/>Ship battle <span></span></a></h1> <a href="<?= WEB_PATH ?>/pages/login.php">Přihlásit</a>
+</header>

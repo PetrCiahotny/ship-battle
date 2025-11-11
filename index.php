@@ -5,7 +5,7 @@ include_once "consts.php";
 /**
  * Konstanta relativní cesty k rootu URL na serveru např.: adresar (z URL http://localhost/adresar)
  */
-//define("RELATIVE_ROOT", rtrim(dirname($_SERVER['PHP_SELF']), "/"));
+define("RELATIVE_ROOT", rtrim(dirname($_SERVER['PHP_SELF']), "/"));
 
 //include_once ROOT . "/game_objects/Game.php";
 include_once "game_objects/Game.php";
@@ -34,10 +34,9 @@ Board::getInstance()->init();
                 width: 100%;
                 height: 100%;
                 margin: 0;
-                border: solid 1px red;
+               border: solid 1px red;
             }
         </style>
-        
     </head>
     <body>
         <header class="wave1 header">
@@ -48,7 +47,7 @@ Board::getInstance()->init();
         ?>
         <div class="battleBody">
             <?php
-            switch (GameBase::getParamByIndex(0)) {
+            switch (GameBase::getParamByKey(0)) {
                 case 'user':
                     Player::getInstance()->render();
                     break;

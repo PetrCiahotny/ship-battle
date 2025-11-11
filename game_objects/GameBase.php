@@ -1,7 +1,6 @@
 <?php
 include_once "game_objects/Message.php";
 
-
 abstract class  GameBase
 {
     /**
@@ -68,7 +67,7 @@ abstract class  GameBase
     }
 
 
-    public static function getParamByIndex(int|string $index): string
+    public static function getParamByKey(int|string $index): string
     {
         if(self::$routes === null){
             if (isset($_GET['route'])) {

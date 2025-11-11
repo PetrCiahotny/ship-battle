@@ -43,8 +43,8 @@ class History extends GameBase
         //Logger::log("Curr call ");
         //Logger::log("Curr call ". Game::getInstance()->getRouteAtIndex(1));
         $id = -1;
-        if (GameBase::getParamByIndex(0) == 'history') {
-             $id = GameBase::getParamByIndex(1) ?? -1;
+        if (GameBase::getParamByKey(0) == 'history') {
+             $id = GameBase::getParamByKey(1) ?? -1;
         }
         Game::getInstance()->resetCurrentState();
         Game::getInstance()->resetCurrentGame();
