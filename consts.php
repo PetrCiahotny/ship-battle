@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $webRoot = $_SERVER['DOCUMENT_ROOT'];
 $webRootLength = strlen($webRoot);
 
@@ -8,3 +10,4 @@ define("INCLUDE_PATH", rtrim(realpath(__DIR__), "/\\"));
 /** Konstanta relativní cesty k rootu URL na serveru např.: adresar (z URL http://localhost/adresar) */
 define("WEB_PATH", rtrim(substr($webRoot, $webRootLength), "/\\"));
 
+define("APP_NAME", 'Ship battle');
