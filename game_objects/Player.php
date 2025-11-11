@@ -14,9 +14,9 @@ class Player extends GameBase
 
     public function init() : void
     {
-        if(GameBase::getParamByIndex(0) == 'user') {
+        if(GameBase::getParamByKey(0) == 'user') {
             if (self::isPost()) {
-                switch (GameBase::getParamByIndex(1)) {
+                switch (GameBase::getParamByKey(1)) {
                     case 'login':
                         $this->login();
                         break;
@@ -27,7 +27,7 @@ class Player extends GameBase
                         break;
                 }
             } else {
-                if (GameBase::getParamByIndex(1) == 'logout') {
+                if (GameBase::getParamByKey(1) == 'logout') {
                     $this->logout();
                 }
             }
@@ -46,16 +46,15 @@ class Player extends GameBase
 
     public function render() : void
     {
-        if(!self::isPost() || !$this->logged()){ ?>
+        if(!self::isPost() || !$this->logged()){
+            ?>
             <div>
                 <form method="post" class="cover">
-                    <h2><?= GameBase::getParamByIndex(1) == 'login' ?  'přihlášení' : 'registrace' ?></h2>
+                    <h2><?= GameBase::getParamByKey(1) == 'login' ?  'přihlášení' : 'registrace' ?></h2>
                     <input type="text" name="name" value="<?= $_POST['name'] ?? '' ?>" id="name" />
                     <input type="password" name="password" value="" id="password" />
                     <input name="action" value="přihlásit se" type="submit"/>
                 </form>
-
-                <?php /*include_once ($_SERVER["DOCUMENT_ROOT"] . "/components/login.php") */ ?>
             </div>
         <?php }else{ ?>
 
@@ -69,18 +68,7 @@ class Player extends GameBase
         }
         return self::$instance;
     }
-/*
-    public function info(): void
-    {
-        if (Player::$instance->logged()) { ?>
-            <div><a href="#">uživatel <?= $_SESSION['user'] ?></a> <a
-                        href="<?= Game::getInstance()->getRouteLink('/user/logout') ?>">odhlásit</a></div>
-        <?php } else { ?>
-            <div><a href="<?= Game::getInstance()->getRouteLink("/user/login") ?>">přihlášení</a> / <a
-                        href="<?= Game::getInstance()->getRouteLink("/user/register") ?>">registrace</a></div>
-        <?php }
-    }
-*/
+
     public function getUserLinks() : void
     {
         if(Player::$instance->logged()){ ?>
@@ -93,7 +81,7 @@ class Player extends GameBase
     protected function login()
     {
         try {
-                $name = htmlentities($_POST['name'], ENT_QUOTES|ENT_SUBSTITUTE);
+            $name = htmlentities($_POST['name'], ENT_QUOTES|ENT_SUBSTITUTE);
                 if (strlen($name) > 0) {
                     $password = htmlentities($_POST['password'], ENT_QUOTES|ENT_SUBSTITUTE);
                     if (strlen($password) > 0) {
@@ -105,6 +93,7 @@ class Player extends GameBase
                         if (count($res) == 1) {
                             $_SESSION['user'] = $res[0]['jmeno'];
                             $_SESSION['id'] = $res[0]['id'];
+
                             //header("Location: {$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}");
                             //header("Location: ".RELATIVE_ROOT);
                             self::reload();
@@ -116,7 +105,7 @@ class Player extends GameBase
                 $this->addMessage('neplatné heslo nebo uživatel', MessageLevel::ERROR);
             }
         } catch (Throwable $ex) {
-
+            echo $ex->getMessage();
         }
     }
 }

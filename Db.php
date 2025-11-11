@@ -1,13 +1,15 @@
 <?php
-include_once "game_objects/Logger.php";
+include_once 'game_objects/Logger.php';
+include_once 'game_objects/Message.php';
 
 class Db
 {
     //jméno z kontejneru Dockeru
-    protected ?string $servername = "db";
-    protected ?string $username = "root";
-    protected ?string $password = "secret";
-    protected ?string $database = "lode";
+    protected ?string $servername =  'localhost'; //db
+    protected ?int $port =  3306;
+    protected ?string $username = 'root';
+    protected ?string $password = '';//"secret";
+    protected ?string $database = 'lode';
     protected ?\PDO $db = null;
 
 
@@ -15,7 +17,7 @@ class Db
 
 
     protected function __construct(){
-        $this->db = new PDO("mysql:host={$this->servername};dbname={$this->database}",
+        $this->db = new PDO("mysql:host={$this->servername};port={$this->port};dbname={$this->database}",
             $this->username, $this->password);
     }
 
@@ -55,5 +57,4 @@ class Db
         $stat = self::prepare($query, $params);
         return $stat->execute();
     }
-
 }

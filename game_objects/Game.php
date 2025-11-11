@@ -157,8 +157,8 @@ class Game extends GameBase
     {
         if (Player::getInstance()->logged()) {
             $currGame = $this->getCurrentGame();
-            if (GameBase::getParamByIndex(0) == 'game') {
-                switch (GameBase::getParamByIndex(1)) {
+            if (GameBase::getParamByKey(0) == 'game') {
+                switch (GameBase::getParamByKey(1)) {
                     case 'action':  
                         $action = $_POST['action'];
                         $postId = -1;
@@ -250,14 +250,14 @@ class Game extends GameBase
                             
                         break;
                     case 'show-game':
-                        $id = GameBase::getParamByIndex(2) ?? -1;
+                        $id = GameBase::getParamByKey(2) ?? -1;
                         if($id > 0){
                             $this->historyId = $id;
                         }
                         Game::getInstance()->resetCurrentGame();
                         break;
                     case 'give-up':
-                        $id = GameBase::getParamByIndex(2);
+                        $id = GameBase::getParamByKey(2);
                         $currGame = Game::getInstance()->getCurrentGame();
                         if ($currGame != null) {
                             Logger::log("give-up");
