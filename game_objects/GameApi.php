@@ -1,4 +1,9 @@
 <?php
+/*
+ * Copyright (c) 2025.
+ * Petr Ciahotný
+ */
+
 include_once  $_SERVER["DOCUMENT_ROOT"]."/game_objects/GameBase.php";
 include_once  $_SERVER["DOCUMENT_ROOT"]."/Db.php";
 include_once  $_SERVER["DOCUMENT_ROOT"]."/game_objects/Logger.php";

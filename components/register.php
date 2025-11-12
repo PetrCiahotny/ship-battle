@@ -1,3 +1,9 @@
+<?php
+/*
+ * Copyright (c) 2025.
+ * Petr Ciahotný
+ */
+?>
 <form method="post" class="cover">
     <h2>registrace</h2>
     <input type="text" name="name" value="<?= $_POST['name'] ?? '' ?>" id="name" />

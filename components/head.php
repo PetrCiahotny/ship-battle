@@ -1,3 +1,10 @@
+<?php
+/*
+ * Copyright (c) 2025.
+ * Petr Ciahotný
+ */
+
+?>
 <head>
     <title><?= APP_NAME ?></title>
     <link rel="stylesheet"  href="<?= WEB_PATH ?>/styles.css"/>
