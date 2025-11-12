@@ -1,4 +1,9 @@
 <?php
+/*
+ * Copyright (c) 2025.
+ * Petr Ciahotný
+ */
+
 class Player extends GameBase
 {
     protected static ?Player $instance = null;

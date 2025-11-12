@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author PetrCiahotný
+ */
 enum BoardCellState : string{
     case WATER = "WATER";
     case CHECKBOX = "CHECKBOX";
