@@ -5,6 +5,7 @@ include_once "game_objects/Game.php";
 include_once "game_objects/Player.php";
 include_once "game_objects/Board.php";
 include_once "game_objects/History.php";
+
 Game::getInstance()->init();
 Player::getInstance()->init();
 Board::getInstance()->init();
@@ -20,8 +21,8 @@ Board::getInstance()->init();
             .shipGrid {
                 padding: 0;
                 display: grid;
-                grid-template-columns: repeat(<?= Game::getInstance()->gridCellCount ?>, <?= Game::getInstance()->cellSize ?>);
-                grid-template-rows: repeat(<?= Game::getInstance()->gridCellCount ?>, <?= Game::getInstance()->cellSize ?>);
+                grid-template-columns: repeat(10, 3.5vw);
+                grid-template-rows: repeat(10, 3.5vw);
             }
             .shipCheck{
                 width: 100%;
@@ -33,11 +34,12 @@ Board::getInstance()->init();
     </head>
     <body>
         <header class="wave1 header">
-            <h1><a href=<?= WEB_PATH ?>/>Ship battle <span></span></a></h1> <?php Player::getInstance()->getUserLinks(); ?>
+            <h1><a href=<?= WEB_PATH ?>/>Ship battle <span></span></a></h1>
+            <div>
+                <a href="<?= WEB_PATH ?>/pages/login.php">přihlášení</a> / <a href="<?= WEB_PATH ?>/index.php?type=user&action=register">registrace</a>
+            </div>
         </header>
-        <?php
-            GameBase::renderMessages();
-        ?>
+
         <div class="battleBody">
             <?php
             switch (GameBase::getParamByKey(0)) {

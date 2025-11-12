@@ -18,4 +18,3 @@ define("WEB_PATH", str_replace("\\", "/", substr(__DIR__, strlen($_SERVER['DOCUM
 
 define("APP_NAME", 'Ship battle');
 
-include_once INCLUDE_PATH."/game_objects/GameBase.php";
