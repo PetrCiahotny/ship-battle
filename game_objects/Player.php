@@ -52,7 +52,7 @@ class Player extends GameBase
                     <h2><?= GameBase::getParamByKey(1) == 'login' ?  'přihlášení' : 'registrace' ?></h2>
                     <input type="text" name="name" value="<?= $_POST['name'] ?? '' ?>" id="name" />
                     <input type="password" name="password" value="" id="password" />
-                    <input name="action" value="přihlásit se" type="submit"/>
+                    <button name="action" value="login-button" type="submit">přihlásit se</button>
                 </form>
             </div>
         <?php }else{ ?>
@@ -92,13 +92,15 @@ class Player extends GameBase
                         if (count($res) == 1) {
                             $_SESSION['user'] = $res[0]['jmeno'];
                             $_SESSION['id'] = $res[0]['id'];
-                            self::reload();
-                            die();
+                            //self::reload();
+                            //die();
                         }
                     }
                 }
             if (!$this->logged()) {
                 $this->addMessage('neplatné heslo nebo uživatel', MessageLevel::ERROR);
+            }else{
+                $this->addMessage('jste přihlášen', MessageLevel::SUCCESS);
             }
         } catch (Throwable $ex) {
             echo $ex->getMessage();

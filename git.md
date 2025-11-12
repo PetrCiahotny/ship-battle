@@ -28,6 +28,7 @@ přepnutí se do požadované větve
 `git merge VETEV`
 sloučení VETVE do aktuální větve
 
+`# komentar` - komentář
 
 ## Vlatnictví repozitáře
 
@@ -68,6 +69,9 @@ nahrání větve <vetev> na vzdálený repozitář
 
 soubor .gitignore
 syntaxe:
+`adresar/` - ignoruje adresar
+`*.txt` - ignoruje textové soubory
+`!readme.md`  kromě readme.md
 
 
 
