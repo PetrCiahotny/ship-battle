@@ -12,7 +12,7 @@ class Board extends GameBase
 {
     protected static ?Board $instance = null;
 
-    protected array $startupJS = [];
+    //protected array $startupJS = [];
 
     public static function getInstance(): Board
     {
@@ -119,13 +119,15 @@ class Board extends GameBase
         </div> <?php
     }
 
+
     public function render(): void
     {
         $state = Game::getInstance()->getCurrentState();
         if(Game::getInstance()->getCurrentGame() != null){
+            /*
             if($state == GameState::MY_TURN){
                 $this->startupJS[] = "prepareShot()";
-            }
+            }*/
              ?>
                 <div class="grids">
             <?php
@@ -152,8 +154,8 @@ class Board extends GameBase
             ?>
                 </div>
             <script>
-                <?php foreach ($this->startupJS as $call){ ?>
-                    document.addEventListener("DOMContentLoaded", <?= $call ?>);
+                <?php if($state == GameState::MY_TURN){ ?>
+                    document.addEventListener("DOMContentLoaded", prepareShot());
                 <?php } ?>
             </script>
         <?php }
