@@ -1,5 +1,9 @@
 <?php
-//include_once $_SERVER["DOCUMENT_ROOT"] .
+/*
+ * Copyright (c) 2025.
+ * Petr Ciahotný
+ */
+
 include_once  "GameBase.php";
 include_once "Db.php";
 include_once realpath(__DIR__."/../Db.php");

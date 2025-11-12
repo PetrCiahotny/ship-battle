@@ -1,4 +1,9 @@
 <?php
+/*
+ * Copyright (c) 2025.
+ * Petr Ciahotný
+ */
+
 include_once "game_objects/Message.php";
 
 abstract class  GameBase

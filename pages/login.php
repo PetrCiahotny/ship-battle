@@ -1,5 +1,10 @@
 <?php
-    include_once "../consts.php";
+/*
+ * Copyright (c) 2025.
+ * Petr Ciahotný
+ */
+
+include_once "../consts.php";
 ?>
 <!DOCTYPE html>
 <html>

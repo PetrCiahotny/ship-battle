@@ -1,4 +1,9 @@
 <?php
+/*
+ * Copyright (c) 2025.
+ * Petr Ciahotný
+ */
+
 include_once "consts.php";
 
 include_once "game_objects/Game.php";
