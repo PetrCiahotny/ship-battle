@@ -6,6 +6,7 @@
 
 class Logger
 {
+    protected static bool $allowLog = false;
     public static function log(string|array $message, string $logPrefix = '') : void
     {
 
@@ -22,7 +23,7 @@ class Logger
             $message = print_r($message, true);
         }
 
-        if(true) {
+        if(self::$allowLog) {
             $f = fopen($log_file, "a");
             if($f) {
                 fwrite($f, date("H-i-s") ." [".($_SESSION['id'] ?? 0)."] ". "\n{$message}\n\n");
