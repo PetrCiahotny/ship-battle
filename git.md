@@ -1,4 +1,6 @@
-# Základní příkazy GITu: 
+
+
+## Základní příkazy GITu: ## 
 
 `git init`
 vytvoří repozitář
