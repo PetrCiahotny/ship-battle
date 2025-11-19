@@ -10,7 +10,7 @@
 *Douglas Adams - Stopařův průvodce po Galaxii (1980)*
 
 
-Repozitář se dá naklonovat do adresáře pomocí příkazu:
+Repozitář se dá naklonovat do adresáře pomocí příkazu:  
 `git clone https://github.com/PetrCiahotny/ship-battle.git .`  
 tečka na konci znamená že se repozitář naklonuje do aktuální adresáře, pokud se neuvede vytvoří se adresář
 s názvem repozitáře (ship-battle) a do něj se naklonuje.

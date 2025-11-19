@@ -4,6 +4,9 @@
 
 ## Animace pomocí CSS ##
 
+doporučuji stránky s popisem:  
+https://www.w3schools.com/css/css3_animations.asp
+
 ### CSS ###
 v souboru styles.css
 
