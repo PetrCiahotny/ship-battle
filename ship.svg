@@ -24,7 +24,7 @@
                 65% {left: 10em;transform: scale(1,1); font-size: 20px; opacity: 1; color: navy;}
                 85% {left: 0em; font-size: 5px; content: "⛴";opacity: 0.5; font-size: 0.5vw;}
                 86% {left: 0em; content: '\01F4A5';opacity: 0.8;font-size: px;}
-                88% {left: 0em; content: '\01F4A5';opacity: 1; font-size: 10px}
+                88% {left: 0em; content: '\01F4A5';opacity: 1; font-size: 20px}
                 95% {font-size: 2px; opacity: 0.5;}
                 100% {opacity: 0;}
                 }
