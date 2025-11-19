@@ -1,0 +1,36 @@
+<svg fill="none" viewBox="0 0 600 100" width="600" height="60" xmlns="http://www.w3.org/2000/svg">
+    <foreignObject style="" width="100%" height="100%">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+            <style>
+                h1{
+                    color:navy;
+                    font-size:50px
+                }
+                .ship::after{
+                content: "";
+                margin-left: 5px;
+                color: black;
+                font-style: normal;
+                font-size: 50px;
+                animation: shipMove 20s ease infinite forwards;
+                animation-delay: 1s;
+                position: relative;
+                display: inline-block;
+                opacity: 0;
+                }
+
+                @keyframes shipMove {
+                0% {left: -8em; font-size: 10px; transform: scale(-1,1);opacity: 0.4; content: "⛴"; color: gray;}
+                60% {left: 10em; transform: scale(-1,1);}
+                65% {left: 10em;transform: scale(1,1); font-size: 20px; opacity: 1; color: navy;}
+                85% {left: 0em; font-size: 5px; content: "⛴";opacity: 0.5; font-size: 5px;}
+                86% {left: 0em; content: '\01F4A5';opacity: 0.8;font-size: 5px;}
+                88% {left: 0em; content: '\01F4A5';opacity: 1; font-size: 20px}
+                95% {font-size: 2px; opacity: 0.5;}
+                100% {opacity: 0;}
+                }
+            </style>
+            <h1>ship battle <span class="ship"></span></h1>
+        </div>
+    </foreignObject>
+</svg>
