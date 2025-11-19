@@ -75,7 +75,7 @@ Content-Type: text/html; charset=UTF-8
 </code></pre>
 
 ### favicon.ico ###
-ikona v záložce prohlížeče - binární soubor se převede do textové formy pomocí Base64 kódování
+odpověď na stažení favicon.ico, ikony v záložce prohlížeče - binární soubor se převede do textové formy pomocí Base64 kódování
 
 <pre style="white-space: pre; overflow-x: auto;"><code>
 HTTP/1.1 200 OK
