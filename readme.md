@@ -9,6 +9,8 @@
 ### `odpověď na základní otázku života, vesmíru a vůbec` ###  
 *Douglas Adams - Stopařův průvodce po Galaxii (1980)*
 
+# OBSAH #
+
 [HTTP protokol](/http.md)  
 [GIT](/git.md)  
 [Pole](/array.md)  

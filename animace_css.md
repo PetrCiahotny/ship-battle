@@ -8,7 +8,7 @@
 v souboru styles.css
 
 <pre style="white-space: pre; overflow-x: auto;"><code>
-/* základní class - ::after se použije kvúli kontextu 💥 a ⛴ (znaky UNICODE) */
+/* základní class - ::after se použije kvůli kontextu 💥 a ⛴ (znaky UNICODE) */
 .lod::after{
     content: "";
     margin-left: 5px;
