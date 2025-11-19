@@ -19,3 +19,18 @@
 
 ### převod pole na string ###
 `print_r($a, true);`
+
+## Rozdíly oproti C# ##  
+
+Základní pole
+Pole v PHP je dynamické, v C# má pevnou délku  
+Pole v PHP je zároveň indexové i asociativní  
+
+Alternativy dynamických kolekcí v C#:  
+
+ PHP                | C#  
+--- | ---
+ indexové pole      | \<T\>List
+ asociativní pole   | \<T\>Dictionary
+
+
