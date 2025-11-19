@@ -10,7 +10,7 @@
 6. Polymorfismus - v PHP jsou metody ve třídach automaticky virtuální
 
 
-### Polymorfismus v C# ###
+### Polymorfismus v PHP ###
 <pre style="white-space: pre; overflow-x: auto;"><code>
 class Animal {
     public function expressYourself() {
