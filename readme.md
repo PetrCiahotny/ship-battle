@@ -9,6 +9,16 @@
 ### `odpověď na základní otázku života, vesmíru a vůbec` ###  
 *Douglas Adams - Stopařův průvodce po Galaxii (1980)*
 
+
+Repozitář se dá naklonovat do adresáře pomocí příkazu:
+`git clone https://github.com/PetrCiahotny/ship-battle.git .`  
+tečka na konci znamená že se repozitář naklonuje do aktuální adresáře, pokud se neuvede vytvoří se adresář
+s názvem repozitáře (ship-battle) a do něj se naklonuje.
+
+Po naklonování doporučuji si udělat novou větev příkazem `git switch -c vyvoj` a dělat pokusy na této větvi.
+
+Všeobecně lze v repozitářích najít adresu pro naklonování pod zeleným tlačítkem  **&lt; > Code**  
+
 # OBSAH #
 
 [HTTP protokol](/http.md)  
