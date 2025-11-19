@@ -67,7 +67,7 @@ internal class Cat : Animal
     }
 }
 
-List<Animal> animals = new List<Animal>();
+List<Animal> animals = new List\<Animal\>();
 animals.Add(new Dog());
 animals.Add(new Cat());
 
