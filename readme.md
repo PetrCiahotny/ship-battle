@@ -11,6 +11,6 @@
 [Pole](/array.md)  
 [OOP](/oop.md)
 
-<div align="center">
-    <img src="ship.svg" width="1200" height="200" alt="css-in-readme">
+<div style="padding: 0;">
+    <img src="ship.svg" width="1200" style="margin: 0" height="200" alt="css-in-readme">
 </div>
