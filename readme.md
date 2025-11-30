@@ -17,7 +17,7 @@ s názvem repozitáře (ship-battle) a do něj se naklonuje.
 
 Po naklonování doporučuji si udělat novou větev příkazem `git switch -c vyvoj` a dělat pokusy na této větvi.
 
-Všeobecně lze v repozitářích najít adresu pro naklonování pod zeleným tlačítkem  **&lt; > Code**  
+Všeobecně lze v repozitářích GitHubu najít adresu pro naklonování pod zeleným tlačítkem  **&lt; > Code**  
 
 # OBSAH #
 

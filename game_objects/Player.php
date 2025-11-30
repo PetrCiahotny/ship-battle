@@ -86,9 +86,9 @@ class Player extends GameBase
     {
         try {
             $name = htmlentities($_POST['name'], ENT_QUOTES|ENT_SUBSTITUTE);
-                if (strlen($name) > 0) {
+                if (mb_strlen($name) > 0) {
                     $password = htmlentities($_POST['password'], ENT_QUOTES|ENT_SUBSTITUTE);
-                    if (strlen($password) > 0) {
+                    if (mb_strlen($password) > 0) {
                         $password = $this->getPasswordHash($password, $name);
                         $res = DB::select("SELECT * FROM lode.uzivatele WHERE jmeno = :jmeno AND heslo = :heslo", [
                                 'jmeno' => $name,
