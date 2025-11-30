@@ -14,7 +14,7 @@ define("INCLUDE_PATH", rtrim(realpath(__DIR__), "/\\"));
 
 /** Konstanta relativní cesty k rootu URL na serveru např.: adresar (z URL http://localhost/lode) */
 //define("WEB_PATH", rtrim(dirname($_SERVER['PHP_SELF']), "/"));
-define("WEB_PATH", str_replace("\\", "/", substr(__DIR__, strlen($_SERVER['DOCUMENT_ROOT']))));
+define("WEB_PATH", str_replace("\\", "/", substr(__DIR__, mb_strlen($_SERVER['DOCUMENT_ROOT']))));
 
 define("APP_NAME", 'Ship battle');
 

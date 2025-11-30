@@ -93,9 +93,9 @@ class Game extends GameBase
 
                         if ($currGame["uzivatel{$opponentIndex}"] > 0) {
                             $this->State = GameState::ACCEPTED;
-                            if (strlen($currGame["my_map"])) {
+                            if (mb_strlen($currGame["my_map"])) {
                                 $this->State = GameState::POSITIONED;
-                                if (strlen($currGame["opponent_map"]) > 0) {
+                                if (mb_strlen($currGame["opponent_map"]) > 0) {
                                     $this->State = GameState::STARTED;
                                     $turns = DB::select("SELECT * FROM lode.tahy WHERE id_hry = :id_hry ORDER BY id", ["id_hry" => $currGame["id"]]);
                                     $turnCount = count($turns);
