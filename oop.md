@@ -43,38 +43,48 @@ foreach ($animals as $animal) {
 ### Polymorfismus v C# ###
 
 <pre style="white-space: pre; overflow-x: auto;"><code>
-internal class Animal
+namespace ConsoleApp1
 {
-    public virtual void expressYourself()
+    internal class Animal
     {
-        Console.Write("I am a animal");
+        public virtual void expressYourself()
+        {
+            Console.Write("I am a animal");
+        }
     }
-}
-
-internal class Dog : Animal
-{
-    public virtual void expressYourself()
+    
+    internal class Dog : Animal
     {
-        Console.Write("woof-woof");
+        public override void expressYourself()
+        {
+            Console.Write("woof-woof");
+        }
     }
-}
-
-internal class Cat : Animal
-{
-    public virtual void expressYourself()
+    
+    internal class Cat : Animal
     {
-        Console.Write("meow-meow");
+        public override void expressYourself()
+        {
+            Console.Write("meow-meow");
+        }
     }
-}
+    
+    
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List&lt;Animal&gt; animals = new List&lt;Animal&gt;();
+            animals.Add(new Dog());
+            animals.Add(new Cat());
 
-List<Animal> animals = new List\<Animal\>();
-animals.Add(new Dog());
-animals.Add(new Cat());
-
-foreach (var animal in animals)
-{
-    animal.expressYourself();
-    Console.Write(", ");
+            foreach (var animal in animals)
+            {
+                animal.expressYourself();
+                Console.Write(", ");
+            }
+        }
+    }
 }
 
 // Output: woof-woof, meow-meow

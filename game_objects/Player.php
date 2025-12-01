@@ -50,7 +50,7 @@ class Player extends GameBase
 
     public function render() : void
     {
-        if(!self::isPost() || !$this->logged()){
+        if(!self::isPost() && !$this->logged()){
             ?>
             <div>
                 <form method="post" class="cover">
@@ -60,9 +60,11 @@ class Player extends GameBase
                     <button name="action" value="login-button" type="submit">přihlásit se</button>
                 </form>
             </div>
-        <?php }else{ ?>
-
-        <?php }
+        <?php }else{
+            if($this->logged()){ ?>
+                <a href="<?= GameBase::getLinkUrl('/') ?>">pokračovat na hru ....</a>
+            <?php }
+        }
     }
 
     public static function getInstance() : self
@@ -86,9 +88,9 @@ class Player extends GameBase
     {
         try {
             $name = htmlentities($_POST['name'], ENT_QUOTES|ENT_SUBSTITUTE);
-                if (strlen($name) > 0) {
+                if (mb_strlen($name) > 0) {
                     $password = htmlentities($_POST['password'], ENT_QUOTES|ENT_SUBSTITUTE);
-                    if (strlen($password) > 0) {
+                    if (mb_strlen($password) > 0) {
                         $password = $this->getPasswordHash($password, $name);
                         $res = DB::select("SELECT * FROM lode.uzivatele WHERE jmeno = :jmeno AND heslo = :heslo", [
                                 'jmeno' => $name,

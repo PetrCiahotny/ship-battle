@@ -10,6 +10,7 @@ enum MessageLevel: string
     case WARNING = 'warning';
     case ERROR = 'error';
     case SUCCESS = 'success';
+    case GAME_STATE = 'game_state';
 
     public function toString() : string{
         return  $this->value;

@@ -17,6 +17,7 @@ Board::getInstance()->init();
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <title>Ship battle</title>
         <link rel="stylesheet"  href="styles.css"/>
         <script type="text/javascript" src="script.js?v3"></script>
@@ -38,9 +39,10 @@ Board::getInstance()->init();
     </head>
     <body>
         <header class="wave1 header">
-            <h1><a href=<?= WEB_PATH ?>/>Ship battle <span></span></a></h1> <?php Player::getInstance()->getUserLinks(); ?>
+            <h1><a href=<?= WEB_PATH ?>/>Ship battle <span class="lod"></span></a></h1> <?php Player::getInstance()->getUserLinks(); ?>
         </header>
         <?php
+            //GameBase:: Game::getInstance()->getCurrentState()->value
             GameBase::renderMessages();
         ?>
         <div class="battleBody">
