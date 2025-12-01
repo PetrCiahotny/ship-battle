@@ -8,6 +8,8 @@ function shot(ev) {
     }
 }
 
+
+
 function prepareShot(){
     let cells = document.querySelectorAll(".opponentBoard .field");
     cells.forEach(cell => {

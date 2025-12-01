@@ -252,12 +252,14 @@ class Game extends GameBase
         $this->resetCurrentState();
         $currState = $this->getCurrentState();
         $currGame = $this->getCurrentGame();
+
+        $this->addMessage("stav hry: ".$this->getCurrentState()->toString(), MessageLevel::GAME_STATE);
+
         switch ($currState){
             case GameState::NONE:
                 break;
             case GameState::CREATED:
                 $this->addMessage("čekám na soupeře", MessageLevel::INFO);
-                
                 break;
             case GameState::MY_TURN:
                 $this->addMessage("jsem na tahu", MessageLevel::INFO);
@@ -270,7 +272,7 @@ class Game extends GameBase
                 $_SESSION['game'] = $currGame['id'];
                 break;
             default:
-                $this->addMessage("stav hry: ".$this->getCurrentState()->toString(), MessageLevel::INFO);
+
                 break;
         }
         
@@ -431,6 +433,68 @@ class Game extends GameBase
         <?php
     }
 
+    public function renderRefresh()
+    {
+        $refreshPageRadioChecked = $_POST['refreshPageRadio'] ?? 'N';
+        ?>
+        <form method="post" class="refreshOptions" id="refreshPageForm">
+            <fieldset>
+                <legend>obnovení stránky </legend>
+                <label><input onchange="refreshPage()"
+                              name="refreshPageRadio" <?= $refreshPageRadioChecked == 'N' ? 'checked' : '' ?>
+                              value="N" type="radio" <?= $refreshPageRadioChecked ?> />neobnovovat
+                </label><br/>
+                <label><input onchange="refreshPage()"
+                              name="refreshPageRadio" <?= $refreshPageRadioChecked == 'P' ? 'checked' : '' ?>
+                              value="P" type="radio" <?= $refreshPageRadioChecked ?> /> post</label>
+                <span><?= date('H:i:s') ?></span>
+                <br/>
+                <label><input onchange="refreshPage()"
+                              name="refreshPageRadio" <?= $refreshPageRadioChecked == 'F' ? 'checked' : '' ?>
+                              value="F" type="radio" <?= $refreshPageRadioChecked ?> /> javascript fetch </label>
+                <span id="fetchTime"></span>
+            </fieldset>
+        </form>
+        <!-- blok javascriptu -->
+        <script>
+            function refreshPage(){
+                let rValue = document.querySelector('input[name="refreshPageRadio"]:checked').value;
+                //console.log('rValue', rValue);
+                switch (rValue) {
+                    case 'N':
+                        break;
+                    case 'P':
+                        document.querySelector('#refreshPageForm').submit();
+                        break;
+                    case 'F':
+                        //console.log('FETCH START...')
+                        fetch('<?= WEB_PATH ?>/BattleApi.php', {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({a: 1, b: 'Textual content'})
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                //              console.log(data);
+                                let currentTime = new Date();
+                                document.querySelector('#fetchTime').innerHTML =
+                                    String(currentTime.getHours()).padStart(2, '0')
+                                    + ':' + String(currentTime.getMinutes()).padStart(2, '0')
+                                    + ':' + String(currentTime.getSeconds()).padStart(2, '0');
+                                setTimeout(refreshPage, 4000);
+                            })
+                        break;
+                }
+            }
+            setTimeout(refreshPage, 4000);
+        </script>
+        <!-- konec bloku javascriptu -->
+        <?php
+    }
+
     public function render(): void
     {
         if (Player::getInstance()->logged()) {            
@@ -438,18 +502,18 @@ class Game extends GameBase
             $this->renderForm();
             if ($currentGame != null) {
                 if($currentGame['vitez'] == 0){
-                    
                     switch ($this->getCurrentState()) {
                         case GameState::CREATED:
                         case GameState::POSITIONED:
                         case GameState::OPPONENT_TURN:
-                            ?>
-                            <script> setTimeout(()=>{document.location.href = document.location.href}, 1000);</script>
-                            <?php
+                            $this->renderRefresh();
                             break;
                     }
                 }
-            } 
+            }else{
+                $this->renderRefresh();
+            }
+
         } else { ?>
             <div>nejste přihlášen</div>
         <?php }

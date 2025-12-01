@@ -55,7 +55,7 @@ abstract class  GameBase
         $ret = WEB_PATH. "/index.php";
         switch (count($params)) {
             case 1:
-                $ret .= '?type='.$params[0];
+                $ret .= $params[0] ?  '?type='.$params[0] : '';
                 break;
             case 2:
                 $ret .= '?type='.$params[0];

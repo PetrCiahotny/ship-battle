@@ -42,7 +42,7 @@ Board::getInstance()->init();
             <h1><a href=<?= WEB_PATH ?>/>Ship battle <span class="lod"></span></a></h1> <?php Player::getInstance()->getUserLinks(); ?>
         </header>
         <?php
-
+            //GameBase:: Game::getInstance()->getCurrentState()->value
             GameBase::renderMessages();
         ?>
         <div class="battleBody">
