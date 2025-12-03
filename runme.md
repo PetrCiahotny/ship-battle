@@ -1,5 +1,7 @@
 # Jak zprovoznit #
 
+## Při zprovoznění je třeba nastavit správně přihlašovací údaje k databázi v souboru `DB.php` ##
+
 ## pomoci GITu ## 
 nutný nainstalovaný git, případně použit integrovaný Git ve VS 
 1. vytvořit adresář (stane se z něj repozitář GITu), Pokud se bude spuštět v XAMPu, tak v podadresáří `C:\xampp\htdocs`
