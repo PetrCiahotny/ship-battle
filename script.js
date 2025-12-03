@@ -18,3 +18,4 @@ function prepareShot(){
         })
     })
 }
+

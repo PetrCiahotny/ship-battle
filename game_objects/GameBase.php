@@ -4,7 +4,7 @@
  * Petr Ciahotný
  */
 
-include_once "game_objects/Message.php";
+include_once "Message.php";
 
 abstract class  GameBase
 {
