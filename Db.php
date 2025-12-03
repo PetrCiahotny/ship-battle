@@ -6,7 +6,7 @@ class Db
 {
     //jméno z kontejneru Dockeru
     protected ?string $servername =  'db'; //'localhost'; //db
-    protected ?int $port =  3307;
+    protected ?int $port =  3306;// pokud je v kontejneru - "vidí"
     protected ?string $username = 'root';
     protected ?string $password = 'secret';//"secret";
     protected ?string $database = 'lode';
@@ -17,7 +17,7 @@ class Db
 
 
     protected function __construct(){
-        $this->db = new PDO("mysql:host={$this->servername};port={$this->port};dbname={$this->database}",
+        $this->db = new PDO("mysql:host={$this->servername};port={$this->port};dbname={$this->database};",
             $this->username, $this->password);
     }
 

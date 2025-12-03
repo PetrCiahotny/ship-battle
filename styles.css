@@ -215,6 +215,12 @@ label:has(input:checked){
     flex-direction: row;
 }
 
+.message.game_state{
+    border: solid 1px navy;
+    background-color: #5ba0f2;
+    color: navy;
+    font-style: italic;
+}
 .message.success{
     color: green;
     border-color: green;
@@ -260,6 +266,14 @@ header{
     margin-bottom: 10px;
 
 }
+
+
+fieldset{
+    border: solid 1px navy;
+    border-radius: 10px;
+    margin: 10px 0 20px 0;
+}
+
 
 .menu ul{
     display: flex;
