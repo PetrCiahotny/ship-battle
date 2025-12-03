@@ -5,10 +5,7 @@
 ## KISS ##  
 `Keep It Simple, Stupid`
 
-# 42 #
-### `odpověď na základní otázku života, vesmíru a vůbec` ###  
-*Douglas Adams - Stopařův průvodce po Galaxii (1980)*
-
+petr.ciahotny@gmail.com
 
 Repozitář se dá naklonovat do adresáře pomocí příkazu:  
 `git clone https://github.com/PetrCiahotny/ship-battle.git .`  
@@ -17,7 +14,10 @@ s názvem repozitáře (ship-battle) a do něj se naklonuje.
 
 Po naklonování doporučuji si udělat novou větev příkazem `git switch -c vyvoj` a dělat pokusy na této větvi.
 
-Všeobecně lze v repozitářích GitHubu najít adresu pro naklonování pod zeleným tlačítkem  **&lt; > Code**  
+Všeobecně lze v repozitářích GitHubu najít adresu pro naklonování pod zeleným tlačítkem  **&lt; > Code**    
+Pod stejným tlačítkem je i možnost stáhnout zdrojové kódy v ZIPu
+
+více [jak rozjet](runme.md)  
 
 # OBSAH #
 
@@ -25,5 +25,7 @@ Všeobecně lze v repozitářích GitHubu najít adresu pro naklonování pod ze
 [GIT](/git.md)  
 [Pole](/array.md)  
 [OOP](/oop.md)  
-[Animace CSS (titulek)](animace_css.md)
+[Animace CSS (titulek)](animace_css.md)  
+[JSON - formát pro přenos dat](json.md)  
+[jak rozjet](runme.md)
 
