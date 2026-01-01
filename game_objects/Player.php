@@ -8,6 +8,8 @@ class Player extends GameBase
 {
     protected static ?Player $instance = null;
 
+    protected $isRegister = false;
+
     public function logged(): bool
     {
         return isset($_SESSION['id']) && $_SESSION['id'] > 0;
@@ -26,15 +28,22 @@ class Player extends GameBase
                         $this->login();
                         break;
                     case 'register':
+                        $this->isRegister = true;
                         break;
                     case 'logout':
                         $this->logout();
                         break;
                 }
             } else {
-                if (GameBase::getParamByKey(1) == 'logout') {
-                    $this->logout();
-                }
+                switch(GameBase::getParamByKey(1)){
+                    case 'logout':
+                        $this->logout();
+                        break;
+                    case 'register':
+                        $this->isRegister = true;
+                        $this->login();    
+                        break;
+                }                
             }
         }
     }
@@ -57,6 +66,9 @@ class Player extends GameBase
                     <h2><?= GameBase::getParamByKey(1) == 'login' ?  'přihlášení' : 'registrace' ?></h2>
                     <input type="text" name="name" value="<?= $_POST['name'] ?? '' ?>" id="name" />
                     <input type="password" name="password" value="" id="password" />
+                    <?php if($this->isRegister){ ?>
+                        <input type="password2" name="password2" value="" id="password2" />
+                    <?php } ?>
                     <button name="action" value="login-button" type="submit">přihlásit se</button>
                 </form>
             </div>
@@ -87,10 +99,13 @@ class Player extends GameBase
     protected function login()
     {
         try {
-            $name = htmlentities($_POST['name'], ENT_QUOTES|ENT_SUBSTITUTE);
+            $name = htmlentities($_POST['name'] ?? '', ENT_QUOTES|ENT_SUBSTITUTE);
                 if (mb_strlen($name) > 0) {
                     $password = htmlentities($_POST['password'], ENT_QUOTES|ENT_SUBSTITUTE);
+
                     if (mb_strlen($password) > 0) {
+                        $password2 = htmlentities($_POST['password2'], ENT_QUOTES|ENT_SUBSTITUTE);                                                
+                        
                         $password = $this->getPasswordHash($password, $name);
                         $res = DB::select("SELECT * FROM lode.uzivatele WHERE jmeno = :jmeno AND heslo = :heslo", [
                                 'jmeno' => $name,
@@ -103,6 +118,9 @@ class Player extends GameBase
                             //die();
                         }
                     }
+                }
+                if($this->isRegister){
+                    return;
                 }
             if (!$this->logged()) {
                 $this->addMessage('neplatné heslo nebo uživatel', MessageLevel::ERROR);

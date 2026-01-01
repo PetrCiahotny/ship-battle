@@ -7,7 +7,7 @@
 require_once realpath("../consts.php");
 include_once  "Game.php";
 
-include_once  $_SERVER["DOCUMENT_ROOT"]."/game_objects/GameBase.php";
+include_once  INCLUDE_PATH."/game_objects/GameBase.php";
 
 class GameApi extends GameBase
 {
