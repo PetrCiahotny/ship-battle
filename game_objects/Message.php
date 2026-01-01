@@ -40,6 +40,7 @@ class Message{
         $this->level = $level;
     }
     protected MessageLevel $level = MessageLevel::INFO;
+
     public function __construct(string $message, MessageLevel $level){
         $this->message = $message;
         $this->level = $level;

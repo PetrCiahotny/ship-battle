@@ -39,7 +39,8 @@ Board::getInstance()->init();
     </head>
     <body>
         <header class="wave1 header">
-            <h1><a href=<?= WEB_PATH ?>/>Ship battle <span class="lod"></span></a></h1> <?php Player::getInstance()->getUserLinks(); ?>
+            <h1><a href=<?= WEB_PATH ?>/>Ship battle <span class="lod"></span></a></h1> 
+            <?php Player::getInstance()->getUserLinks(); ?>
         </header>
         <?php
             //GameBase:: Game::getInstance()->getCurrentState()->value
@@ -61,5 +62,9 @@ Board::getInstance()->init();
             }
             ?>
         </div>
+
+        <?php
+            Logger::renderDebug();
+        ?>
     </body>
 </html>

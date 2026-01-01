@@ -5,9 +5,9 @@
  */
 
 include_once  "GameBase.php";
-include_once "Db.php";
-include_once realpath(__DIR__."/../Db.php");
+include_once INCLUDE_PATH."/Db.php";
 include_once "Logger.php";
+require_once "Player.php";
 
 enum GameState: string
 {
@@ -378,6 +378,18 @@ class Game extends GameBase
         <?php
     }
 
+    public function getAvailAbleGamesIds() : string
+    {
+        $availGames = $this->getAvailableGames();
+        $idsArray = [];
+        foreach ($availGames as $game) {
+            $idsArray[] = intval($game['id']);
+        }
+        sort($idsArray);
+
+        return join(",", $idsArray);
+    }
+
 
     public function renderForm() : void{
         $currentGame = $this->getCurrentGame();
@@ -433,9 +445,12 @@ class Game extends GameBase
         <?php
     }
 
-    public function renderRefresh()
+    public function renderRefresh() : void
     {
-        $refreshPageRadioChecked = $_POST['refreshPageRadio'] ?? 'N';
+        $refreshPageRadioChecked = $_POST['refreshPageRadio'] ?? 'F';
+        $currentState = $this->getCurrentState()->value;
+
+        $idsString = $this->getAvailAbleGamesIds();
         ?>
         <form method="post" class="refreshOptions" id="refreshPageForm">
             <fieldset>
@@ -468,23 +483,35 @@ class Game extends GameBase
                         break;
                     case 'F':
                         //console.log('FETCH START...')
-                        fetch('<?= WEB_PATH ?>/BattleApi.php', {
-                            method: 'POST',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({a: 1, b: 'Textual content'})
-                        })
+                        //tady jdu natvrdo na php soubor
+                        fetch('<?= WEB_PATH ?>/game_objects/GameApi.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({'state': '<?= $currentState ?>', games: '<?= $idsString ?>' })
+                            })
                             .then(res => res.json())
                             .then(data => {
                                 //              console.log(data);
-                                let currentTime = new Date();
-                                document.querySelector('#fetchTime').innerHTML =
-                                    String(currentTime.getHours()).padStart(2, '0')
-                                    + ':' + String(currentTime.getMinutes()).padStart(2, '0')
-                                    + ':' + String(currentTime.getSeconds()).padStart(2, '0');
+                                if(data.state == 'OK') {
+                                    if (data.reloadGame === 1) {
+                                        document.location.href = document.location.href;
+                                        return;
+                                    }
+                                    let currentTime = new Date();
+                                    document.querySelector('#fetchTime').innerHTML =
+                                        String(currentTime.getHours()).padStart(2, '0')
+                                        + ':' + String(currentTime.getMinutes()).padStart(2, '0')
+                                        + ':' + String(currentTime.getSeconds()).padStart(2, '0');
+                                }else{
+                                    console.error('ERROR', data);
+                                }
                                 setTimeout(refreshPage, 4000);
+                            })
+                            .catch(err=>{
+                                console.log(err);
                             })
                         break;
                 }

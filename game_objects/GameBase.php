@@ -4,7 +4,7 @@
  * Petr Ciahotný
  */
 
-include_once "game_objects/Message.php";
+include_once "Message.php";
 
 abstract class  GameBase
 {
@@ -23,6 +23,7 @@ abstract class  GameBase
     {
 
     }
+
 
     protected function addMessage(string $message, MessageLevel $level) : void{
         self::$messages[] = new Message($message, $level);
@@ -109,7 +110,7 @@ abstract class  GameBase
     }
 
 
-    protected static function isPost(): bool
+    public static function isPost(): bool
     {
         return $_SERVER["REQUEST_METHOD"] == "POST";
     }

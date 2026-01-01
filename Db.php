@@ -8,7 +8,7 @@ class Db
     protected ?string $servername =  'db'; //'localhost'; //db
     protected ?int $port =  3306;// pokud je v kontejneru - "vidí"
     protected ?string $username = 'root';
-    protected ?string $password = 'secret';//"secret";
+    protected ?string $password = "secret";
     protected ?string $database = 'lode';
     protected ?\PDO $db = null;
 
