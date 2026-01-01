@@ -62,5 +62,9 @@ Board::getInstance()->init();
             }
             ?>
         </div>
+
+        <?php
+            Logger::renderDebug();
+        ?>
     </body>
 </html>

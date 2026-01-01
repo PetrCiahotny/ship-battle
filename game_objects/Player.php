@@ -67,9 +67,9 @@ class Player extends GameBase
                     <input type="text" name="name" value="<?= $_POST['name'] ?? '' ?>" id="name" />
                     <input type="password" name="password" value="" id="password" />
                     <?php if($this->isRegister){ ?>
-                        <input type="password2" name="password2" value="" id="password2" />
+                        <input type="password" name="password2" value="" id="password2" />
                     <?php } ?>
-                    <button name="action" value="login-button" type="submit">přihlásit se</button>
+                    <button name="action" value="<?= $this->isRegister ? "register" : "login" ?>" type="submit"><?= $this->isRegister ? "regitrovat" : "přihlásit se" ?></button>
                 </form>
             </div>
         <?php }else{
@@ -98,24 +98,33 @@ class Player extends GameBase
 
     protected function login()
     {
+        Logger::debug("User Login....");
         try {
             $name = htmlentities($_POST['name'] ?? '', ENT_QUOTES|ENT_SUBSTITUTE);
                 if (mb_strlen($name) > 0) {
                     $password = htmlentities($_POST['password'], ENT_QUOTES|ENT_SUBSTITUTE);
-
                     if (mb_strlen($password) > 0) {
-                        $password2 = htmlentities($_POST['password2'], ENT_QUOTES|ENT_SUBSTITUTE);                                                
-                        
-                        $password = $this->getPasswordHash($password, $name);
-                        $res = DB::select("SELECT * FROM lode.uzivatele WHERE jmeno = :jmeno AND heslo = :heslo", [
-                                'jmeno' => $name,
-                                'heslo' => $password
-                        ]);
-                        if (count($res) == 1) {
-                            $_SESSION['user'] = $res[0]['jmeno'];
-                            $_SESSION['id'] = $res[0]['id'];
-                            //self::reload();
-                            //die();
+                        Logger::debug("login: ".__LINE__);
+                        $passwordHash = $this->getPasswordHash($password, $name);
+                        if($this->isRegister){
+                            $password2 = htmlentities($_POST['password2'], ENT_QUOTES|ENT_SUBSTITUTE);
+                            if($password == $password2){
+                                echo "UKLADAM...";
+                                DB::query("INSERT INTO users (jmeno, heslo) VALUES ('$name', '$passwordHash')");
+                            }else{
+                                $this->addMessage("Heslo a kontrolní heslo se neshoduje", MessageLevel::ERROR);
+                            }
+                        }else{
+                            $res = DB::select("SELECT * FROM lode.uzivatele WHERE jmeno = :jmeno AND heslo = :heslo", [
+                                    'jmeno' => $name,
+                                    'heslo' => $passwordHash
+                            ]);
+                            if (count($res) == 1) {
+                                $_SESSION['user'] = $res[0]['jmeno'];
+                                $_SESSION['id'] = $res[0]['id'];
+                                //self::reload();
+                                //die();
+                            }
                         }
                     }
                 }
