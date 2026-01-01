@@ -23,12 +23,14 @@ class Player extends GameBase
     {
         if(GameBase::getParamByKey(0) == 'user') {
             if (self::isPost()) {
+
                 switch (GameBase::getParamByKey(1)) {
                     case 'login':
                         $this->login();
                         break;
                     case 'register':
                         $this->isRegister = true;
+                        $this->login();
                         break;
                     case 'logout':
                         $this->logout();
@@ -75,7 +77,8 @@ class Player extends GameBase
         <?php }else{
             if($this->logged()){ ?>
                 <a href="<?= GameBase::getLinkUrl('/') ?>">pokračovat na hru ....</a>
-            <?php }
+            <?php
+            }
         }
     }
 
@@ -110,7 +113,7 @@ class Player extends GameBase
                             $password2 = htmlentities($_POST['password2'], ENT_QUOTES|ENT_SUBSTITUTE);
                             if($password == $password2){
                                 echo "UKLADAM...";
-                                DB::query("INSERT INTO users (jmeno, heslo) VALUES ('$name', '$passwordHash')");
+                                DB::query("INSERT INTO lode.uzivatele (jmeno, heslo) VALUES ('$name', '$passwordHash')");
                             }else{
                                 $this->addMessage("Heslo a kontrolní heslo se neshoduje", MessageLevel::ERROR);
                             }
