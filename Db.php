@@ -36,14 +36,13 @@ class Db
         }
         return $prep;
     }
-
-    protected static function log(string|array $message) : void{
-        Logger::log($message, 'DB_');
+/*
+    protected static function log(string $message, array $context = []) : void{
+        Logger::log($message, $context, 'DB_');
     }
-
+*/
     public static function select(string $sql, array $params = []) : array{
-        self::log($sql);
-        self::log($params);
+        Logger::log($sql, $params, 'DB_');
         $stat = self::prepare($sql, $params);
         $stat->execute();
         return $stat->fetchAll(\PDO::FETCH_ASSOC);
@@ -52,9 +51,9 @@ class Db
     public static function query(string $query, array $params = []) : bool
     {
         //echo $query."<hr/>";
-        Logger::log($query);
-        Logger::log($params);
-        $stat = self::prepare($query, $params);
+        Logger::log($query, $params);
+        //Logger::log($params);
+        $stat = self::prepare($query, $params, 'DB_');
         return $stat->execute();
     }
 }
