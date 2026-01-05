@@ -71,7 +71,7 @@ class Player extends GameBase
                     <?php if($this->isRegister){ ?>
                         <input type="password" name="password2" value="" id="password2" />
                     <?php } ?>
-                    <button name="action" value="<?= $this->isRegister ? "register" : "login" ?>" type="submit"><?= $this->isRegister ? "regitrovat" : "přihlásit se" ?></button>
+                    <button name="action" value="<?= $this->isRegister ? "register" : "login" ?>" type="submit"><?= $this->isRegister ? "registrovat" : "přihlásit se" ?></button>
                 </form>
             </div>
         <?php }else{
@@ -101,16 +101,16 @@ class Player extends GameBase
 
     protected function login()
     {
-        Logger::debug("User Login....");
         try {
             $name = htmlentities($_POST['name'] ?? '', ENT_QUOTES|ENT_SUBSTITUTE);
+                Logger::log($name);
                 if (mb_strlen($name) > 0) {
                     $password = htmlentities($_POST['password'], ENT_QUOTES|ENT_SUBSTITUTE);
                     if (mb_strlen($password) > 0) {
-                        Logger::debug("login: ".__LINE__);
                         $passwordHash = $this->getPasswordHash($password, $name);
                         if($this->isRegister){
                             $password2 = htmlentities($_POST['password2'], ENT_QUOTES|ENT_SUBSTITUTE);
+
                             if($password == $password2){
                                 echo "UKLADAM...";
                                 DB::query("INSERT INTO lode.uzivatele (jmeno, heslo) VALUES ('$name', '$passwordHash')");
