@@ -4,7 +4,7 @@ USE lode;
 DROP TABLE IF EXISTS uzivatele;
 CREATE TABLE lode.uzivatele (
                              id int NOT NULL AUTO_INCREMENT,
-                             jmeno varchar(24) NOT NULL,
+                             jmeno varchar(50) NOT NULL,
                              heslo varchar(36) CHARACTER SET utf8mb4   NOT NULL,
                              PRIMARY KEY (id),
                              UNIQUE KEY jmeno_uniq (jmeno)

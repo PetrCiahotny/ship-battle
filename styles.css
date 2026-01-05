@@ -82,12 +82,85 @@ h1 a{
     100% {opacity: 0;}
 }
 
+#debugger{
+     border: solid 1px #555;
+    padding: 2px 10px;
+    background-color: #CCC;
+}
+
+
+.d-none{
+    display: none;
+}
+
+.c-pointer{
+    cursor: pointer;
+}
+
+.back-trace{
+    background-color: burlywood;
+    border: solid 1px #AAA;
+    padding: 2px 5px;
+}
+
+#debugger:before{
+    content: 'logy';
+    margin-top: -2em;
+    position: relative;
+    top:-0.75em;
+    border: solid 1px #555;
+    background-color: #CCC;
+    padding: 2px 5px;
+}
+#log-wrapper{
+    border-top: dotted 1px black;
+}
+
+#log-panel{
+    border-color: #555;
+    background-color: #CCC;
+}
+
+#log-panel li{
+    padding: 2px 5px;
+    border-radius: 4px;
+    white-space: pre ;
+}
+#log-panel .DB_{
+    background-color: bisque;
+}
+
+#log-panel legend{
+    background-color: #DDD;
+    border-radius: 8px;
+    border: solid 1px  #555;
+    padding: 3px 10px;
+}
+
+
+
+#log-panel ul{
+    margin-bottom: 1em;
+}
+
+#log-panel li{
+    margin-bottom: 0.75em;
+}
+#log-panel .method{
+    background-color: burlywood;
+    font-weight: bold;
+    border: solid 1px black;
+    border-radius: 5px;
+    padding: 3px 5px;
+}
+
 form.cover{
     border: solid 1px navy;
     display: inline-flex;
     flex-direction: column;
     padding: 10px 20px;
     width: auto;
+
 }
 
 input[type="text"], input[type="password"]{
