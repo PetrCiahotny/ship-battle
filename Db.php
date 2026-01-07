@@ -1,15 +1,18 @@
 <?php
-include_once 'game_objects/Logger.php';
-include_once 'game_objects/Message.php';
+require_once 'consts.php';
+require_once 'game_objects/Logger.php';
+require_once 'game_objects/Message.php';
 
 class Db
 {
     //jméno z kontejneru Dockeru
-    protected ?string $servername =  'db'; //'localhost'; //db
-    protected ?int $port =  3306;// pokud je v kontejneru - "vidí"
+    protected ?string $servername =  'localhost'; //'db'; //'localhost';
+    protected ?int $port =  3306;// 
     protected ?string $username = 'root';
-    protected ?string $password = "secret";
+    protected ?string $password = '';// "secret";
     protected ?string $database = 'lode';
+
+    
     protected ?\PDO $db = null;
 
 

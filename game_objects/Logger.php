@@ -11,11 +11,11 @@ class LogStruct{
     public string $className = '';
     public array $callStack = [];
     public string $fileInfo = '';
-    protected static bool $allowRender = true;
+    
 
     public function __construct(string $message, array $context = [], string $className = '')
     {
-        $this->message = $message;
+        $this->message = trim($message);
         $this->context = $context;
         $this->className = $className;
         $this->callStack = debug_backtrace();
@@ -28,6 +28,7 @@ class LogStruct{
 class Logger
 {
     protected static bool $allowLog = true;
+    protected static bool $allowRender = true;
 
     /**
      * @var array<LogStruct> $debugArray
@@ -36,7 +37,7 @@ class Logger
 
 
     public static function renderDebug(): void {
-        if(!self::$allowLog){
+        if(!self::$allowRender){
             return;
         }
         ?>
@@ -52,7 +53,7 @@ class Logger
                 <?php
                 foreach (self::$debugArray as $message) {?>
                     <li class="debugLine <?= $message->className ?>">
-                        <?= $message->message ?>
+                        <?= trim($message->message) ?>
                         <?php if(count($message->context) > 0) {
                             echo '<ul>';
                             foreach ($message->context as $key=>$context) {
@@ -79,16 +80,7 @@ class Logger
 
     public static function log(string $message, array $context = [], string $logPrefix = '') : void
     {
-        //$dir = "C:\\xampp\\htdocs\\lode\\logs\\"; // "/var/log/lode/";
-        $dir = "/var/log/lode/";
-        if(!file_exists($dir)){
-            mkdir($dir, 0777, true);
-            chmod($dir, 0777);
-        }
-
-        $date = date("Y-m-d");
-
-        $log_file = "{$dir}{$logPrefix}{$date}.log";
+        
         $contextStr = '';
         if(count($context) > 0){
             $contextStr = "\nContext: \n".print_r($context, true);
@@ -97,7 +89,18 @@ class Logger
         $ls = new LogStruct($message, $context, $logPrefix);
         self::$debugArray[] = $ls;
         if(self::$allowLog) {
+            $dir = "C:\\xampp\\htdocs\\lode\\logs\\"; // "/var/log/lode/";
+            //$dir = "/var/log/lode/";
+            if(!file_exists($dir)){
+                mkdir($dir, 0777, true);
+                chmod($dir, 0777);
+            }
+
+            $date = date("Y-m-d");
+
+            $log_file = "{$dir}{$logPrefix}{$date}.log";
             $f = fopen($log_file, "a");
+        
             if($f) {
                 fwrite($f, date("H-i-s") ." [".($_SESSION['id'] ?? 0)."] ". "\n{$message}\n\n");
                 fclose($f);

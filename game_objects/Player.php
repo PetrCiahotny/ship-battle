@@ -21,6 +21,7 @@ class Player extends GameBase
 
     public function init() : void
     {
+        Logger::log(__CLASS__." INIT");
         if(GameBase::getParamByKey(0) == 'user') {
             if (self::isPost()) {
 

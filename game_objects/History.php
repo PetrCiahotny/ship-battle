@@ -58,7 +58,6 @@ class History extends GameBase
                 <?= $game['cas_start'] ?>
                 <?= $game['opponent'] ?>
                 <?= $game['opponent_name'] ?>
-                ?>
             </div>
         <?php }
     }

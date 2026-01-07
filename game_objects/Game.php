@@ -125,7 +125,7 @@ class Game extends GameBase
                 }
             }
         }
-        Logger::log("return...{$this->State->value}");
+        //Logger::log("return...{$this->State->value}");
         return $this->State;
     }
 
@@ -237,8 +237,7 @@ class Game extends GameBase
                         $id = GameBase::getParamByKey(2);
                         $currGame = Game::getInstance()->getCurrentGame();
                         if ($currGame != null) {
-                            Logger::log("give-up");
-                            Logger::log($currGame);
+                            Logger::log("give-up");                            
                             Logger::log("konec give-up");
                             Db::query("UPDATE lode.bitvy SET vitez = :vitez
                             WHERE id= :id AND :user_id IN (uzivatel1, uzivatel2) AND vitez = 0",
@@ -279,6 +278,8 @@ class Game extends GameBase
         if($currGame && intval($currGame['opponent_id']) > 0){
             $this->addMessage('soupeř: '.$currGame['opponent'], MessageLevel::SUCCESS);
         }
+
+        Logger::log(__CLASS__.': '.__FUNCTION__.': '.$currState->toString());
     }
 
     protected function getAvailableGames(): array
@@ -472,6 +473,7 @@ class Game extends GameBase
         </form>
         <!-- blok javascriptu -->
         <script>
+            let fetchRefresh = 2000;
             function refreshPage(){
                 let rValue = document.querySelector('input[name="refreshPageRadio"]:checked').value;
                 //console.log('rValue', rValue);
@@ -508,7 +510,7 @@ class Game extends GameBase
                                 }else{
                                     console.error('ERROR', data);
                                 }
-                                setTimeout(refreshPage, 4000);
+                                setTimeout(refreshPage, fetchRefresh);
                             })
                             .catch(err=>{
                                 console.log(err);
@@ -516,7 +518,7 @@ class Game extends GameBase
                         break;
                 }
             }
-            setTimeout(refreshPage, 4000);
+            setTimeout(refreshPage, fetchRefresh);
         </script>
         <!-- konec bloku javascriptu -->
         <?php

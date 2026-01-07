@@ -123,11 +123,11 @@ h1 a{
 
 #log-panel li{
     padding: 2px 5px;
-    border-radius: 4px;
-    white-space: pre ;
+    border-radius: 4px;    
 }
 #log-panel .DB_{
     background-color: bisque;
+    white-space: pre ;
 }
 
 #log-panel legend{
