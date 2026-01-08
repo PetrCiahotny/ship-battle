@@ -64,6 +64,7 @@ Board::getInstance()->init();
         </div>
 
         <?php
+            Logger::log('Jsem tu...');
             Logger::renderDebug();
         ?>
     </body>

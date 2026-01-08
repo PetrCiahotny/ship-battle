@@ -73,14 +73,15 @@ class Logger
                 <pre><?= print_r($_GET, true); ?></pre>
                 <div class="method">POST:</div>
                 <pre><?= print_r($_POST, true); ?></pre>
+                <div class="method">SESSION:</div>
+                <pre><?= print_r($_SESSION, true); ?></pre>
             </fieldset>
             </div>
         <?php
     }
 
     public static function log(string $message, array $context = [], string $logPrefix = '') : void
-    {
-        
+    {        
         $contextStr = '';
         if(count($context) > 0){
             $contextStr = "\nContext: \n".print_r($context, true);
@@ -88,6 +89,7 @@ class Logger
 
         $ls = new LogStruct($message, $context, $logPrefix);
         self::$debugArray[] = $ls;
+        
         if(self::$allowLog) {
             $dir = "C:\\xampp\\htdocs\\lode\\logs\\"; // "/var/log/lode/";
             //$dir = "/var/log/lode/";
@@ -102,7 +104,7 @@ class Logger
             $f = fopen($log_file, "a");
         
             if($f) {
-                fwrite($f, date("H-i-s") ." [".($_SESSION['id'] ?? 0)."] ". "\n{$message}\n\n");
+                fwrite($f, date("H-i-s") ." [".($_SESSION['id'] ?? 0)."] ". "\n{$message}\n\n");                
                 fclose($f);
             }
         }
