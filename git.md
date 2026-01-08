@@ -56,7 +56,7 @@ odstraní soubor ze seznamu souborů pro commit
 commit (uložení změn) v aktální větvi
 
 `git checkout -b VETEV`  
-Vytvoří novou větev
+Vytvoří novou větev a přepne se do ní
 
 `git checkout VETEV`  
 přepnutí se do požadované větve

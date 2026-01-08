@@ -9,7 +9,7 @@ class Db
     protected ?string $servername =  'localhost'; //'db'; //'localhost';
     protected ?int $port =  3306;// 
     protected ?string $username = 'root';
-    protected ?string $password = '';// "secret";
+    protected ?string $password = "";// "secret";
     protected ?string $database = 'lode';
 
     
